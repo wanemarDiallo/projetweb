@@ -44,12 +44,20 @@ session_start();
     $prenom = $_POST['prenom'];
     $sexe = $_POST['sexe'];
     $mail = $_POST['mail'];
+    $cdp = $_POST['cdp'];
+    $dateNaiss = $_POST['dateNaiss'];
+    $ville = $_POST['ville'];
+    $tel = $_POST['tel'];
 
     if(!control_login($login)) echo "valuer login non valide";
     else if(!control_mdp($mdp)) echo "valuer mdp non valide il faut au moins 8 caractères";
     else if(!control_name($nom, $prenom)) echo "le nom ou prenom saisie n'est pas valide";
     else if(!control_sexe($sexe)) echo "veuillez renseignez le champ sexe";
     else if(!control_mail($mail)) echo "mail non valide";
+    else if(!control_cdp($cdp)) echo "cdp non valide";
+    else if(!control_date($dateNaiss)) echo "date de naissance non valide, exemple : 10/10/1998";
+    else if(!control_ville($ville)) echo "le nom de la ville non valide";
+    else if(!control_tel($tel)) echo "numéro de Téléphone non valide";
     else
     {
         if(!array_key_exists($login, $table_inscris))//verification s'il n'existe pas un login pareil
@@ -60,10 +68,10 @@ session_start();
                                       'prenom'=>$prenom,
                                       'sexe'=>$sexe,
                                       'mail'=>$mail,
-                                      'date' => $_POST['dateNaiss'],
-                                      'cdp' =>  $_POST['cdp'],
-                                      'ville' => $_POST['ville'],
-                                      'tel' =>   $_POST['num']
+                                      'date' => $dateNaiss,
+                                      'cdp' =>  $cdp,
+                                      'ville' => $ville,
+                                      'tel' =>   $tel
                           )
                         );
         $table_inscris +=$inscris;//ajout du nouveau utilisateur sur la table des inscris
@@ -93,23 +101,42 @@ session_start();
     else return TRUE;
   }
   function control_mail($data_mail){
-    if(!preg_match('/^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/', strtolower(trim($data_mail)))) return FALSE;
+    if(!preg_match('/^[a-z0-9.-]+@[a-z0-9.-]{4,}[.]{1}[a-z]{2,3}$/', strtolower(trim($data_mail)))) return FALSE;
     else return TRUE;
   }
-
-  /*
-  function control_date($data_date){
-
-  }
   function control_cdp($data_cdp){
-
+    if(!preg_match('/^[0-9]{1,5}$/', strtolower(trim($data_cdp)))) return FALSE;
+    else return TRUE;
   }
-  function control_ville($data_ville){
-
+  function control_date($data_date){
+    if(!preg_match('/^[0-9]{2}[\/][0-9]{2}[\/][0-9]{4}$/', trim($data_date))) return FALSE;
+    else
+    {
+      list($jour, $mois, $annee) = explode('/', $data_date);
+      if($mois >= 1 && $mois <= 12){
+        if(($mois != 2 && $jour >= 1 && $jour <= 31) || ($mois == 2 && $jour >= 1 && $jour <= 29)){
+          if($annee >= 1 && $annee <= 32767){
+            if(checkdate($mois, $jour, $annee)) return TRUE;
+            else return FALSE;
+          }
+        else return FALSE;
+        }
+        else return FALSE;
+      }
+      else return FALSE;
+    }
+  }
+  function control_ville($data_ville){//faut traiter les accents (éè)
+    if(!preg_match('/^[a-z-\s]+$/', strtolower(trim($data_ville)))) return FALSE;
+    else return TRUE;
   }
   function control_tel($data_tel){
+    if(!preg_match('/^[0][67][0-9]{8}$/', trim($data_tel))) return FALSE;
+    else return TRUE;
+  }
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  }*/
 	?>
 
   <!--page d'inscription et connexion -->
@@ -127,90 +154,98 @@ session_start();
 		<main class="main_inscription">
 			<div id="formulaireIns">
 				<form action="" method="post" id="inscription">
-          <table>
-            <tr>
-      				<td colspan="2" class="colspan">
-                	<select name="sexe" id="sexe">
-                  <option value="">- sexe -</option>
-      						<option value="Homme">Homme</option>
-      						<option value="Femme">Femme</option>
-      					</select>
-              </td>
-            </tr>
-            <tr>
-              <td>
-    					  <input type="text" name="login" id="login" placeholder="<?php if(!isset($_POST['login'])) echo "Login";?>">
-              </td>
-              <td>
-    					  <input type="password" name="mdp" placeholder="<?php if(!isset($_POST['mdp'])) echo "Mot de passe";?>">
-              </td>
-            <tr>
-            <tr>
-              <td>
-  					     <input type="text" name="nom" id="nom" placeholder="<?php if(!isset($_POST['nom'])) echo "Nom";?>">
-              </td>
-            <td>
-  					       <input type="text" name="prenom" placeholder="<?php if(!isset($_POST['prenom'])) echo "Prénom";?>">
-            </td>
-            </tr>
 
-            <tr>
-              <td>
-  					     <input type="text" name="cdp" placeholder="<?php if(!isset($_POST['cdp'])) echo "Code postal";?>">
-              </td>
-              <td>
-  					       <input type="text" name="ville" placeholder="<?php if(!isset($_POST['ville'])) echo "Ville";?>">
-              </td>
-            </tr>
+          <div class="sexe_ins inscription">
+            <label for="sexe_h">M.</label>
+            <input type="radio" name="sexe" id="sexe_h" value="Homme">
+            <label for="sexe_f">Mm</label>
+            <input type="radio" name="sexe" id="sexe_f" value="femme">
+          </div>
 
-            <tr>
-  					 <td colspan="2" class="colspan">
-               <input type="email" name="mail" placeholder="<?php if(!isset($_POST['mail'])) echo "E-mail : @domaine.com";?>">
-             </td>
-            </tr>
+          <div class="login_ins inscription">
+            <label for="login_ins" class="label_ins">Login</label>
+            <span class="span_ins span_login">Login</span>
+            <input type="text" name="login" id="login_ins">
+          </div>
 
-            <tr>
-  					<td colspan="2" class="colspan">
-              <input type="text" name="dateNaiss" placeholder="<?php if(!isset($_POST['dateNaiss'])) echo "Date naissance : 10/10/2010";?>">
-            </td>
-          </tr>
+          <div class="mdp_ins inscription">
+            <label for="mdp_ins" class="label_ins">Password</label>
+            <span class="span_ins span_mdp">Password</span>
+            <input type="password" name="mdp" id="mdp_ins">
+          </div>
 
-            <tr>
-  				      <td colspan="2" class="colspan">
-            	     <input type="text" name="num" value="<?php if(isset($_POST['num']) && $_POST['num']!='') echo $_POST['num']?>" placeholder="<?php if(!isset($_POST['num'])) echo "Téléphone : 0753164581";?>">
-                </td>
-            <tr>
+          <div class="nom_ins inscription">
+            <label for="nom_ins" class="label_ins">Nom</label>
+            <span class="span_ins span_nom">Nom</span>
+            <input type="text" name="login" id="nom_ins">
+          </div>
 
-            <tr>
-  				     <td colspan="2" class="buttonSubmit">
-                  <!--<button id="submit">Envoie</button>-->
-            	     <input type="submit" name="envoie" id="ins_submit" value="Envoie" />
-              </td>
-            </tr>
-          </table>
+          <div class="prenom_ins inscription">
+            <label for="prenom_ins" class="label_ins">Prénom</label>
+            <span class="span_ins span_prenom">Prénom</span>
+            <input type="text" name="login" id="prenom_ins">
+          </div>
+
+          <div class="mail_ins inscription">
+            <label for="mail_ins" class="label_ins">email</label>
+            <span class="span_ins span_mail">email</span>
+            <input type="email" name="mail" id="mail_ins">
+          </div>
+
+          <div class="dateNaiss_ins inscription">
+            <label for="dateNaiss_ins" class="label_ins label_date">Date de naissance</label>
+            <span class="span_ins span_date">Naissance</span>
+            <input type="text" name="dateNaiss" id="dateNaiss_ins">
+          </div>
+
+          <div class="cdp_ins inscription">
+            <label for="cdp_ins" class="label_ins label_cdp">Code postal</label>
+            <span class="span_ins span_cdp">Code postal</span>
+            <input type="text" name="cdp" id="cdp_ins">
+          </div>
+
+          <div class="ville_ins inscription">
+            <label for="ville_ins" class="label_ins">Ville</label>
+            <span class="span_ins span_ville">Ville</span>
+            <input type="text" name="ville" id="ville_ins">
+          </div>
+
+          <div class="tel_ins inscription">
+            <label for="tel_ins" class="label_ins label_tel">Téléphone</label>
+            <span class="span_ins span_tel">Téléphone</span>
+            <input type="text" name="tel" id="tel_ins">
+          </div>
+
 				</form>
 			</div>
 
       <!--Formulaire de connexion-->
       <div id="formulaireConnexion">
         <p class="text_connexion">Vous êtes déjà incris, renseignez votre login et mot de passe pour vous connecter</p>
-        <form action="#" method="post" name="connexion">
-          <table>
-            <tr>
-              <td>
-                <input type="text" name="login" value="<?php if(isset($_POST['login']) && $_POST['login']!='') echo $_POST['login']?>" placeholder="<?php if(!isset($_POST['login'])) echo "Login";?>">
-              </td>
-              <td>
-                <input type="password" name="mdp">
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2" class="buttonSubmit">
-                <input type="submit" name="connecter" value="connecion"/>
-              </td>
-            </tr>
-          </table>
+        <form action="#" method="post">
+
+          <div class="login connexion">
+            <span class="span_connexion span_login">Login</span>
+            <label for="login" class="label_connexion">Login</label>
+            <input type="text" name="login" id="login">
+          </div>
+
+          <div class="mdp connexion">
+            <span class="span_connexion span_mdp">Password</span>
+            <label for="mdp" class="label_connexion">Password</label>
+            <input type="password" name="mdp" id="mdp">
+          </div>
+
+          <div class="submit_connexion">
+            <input type="submit" name="connecter" value="connecion"/>
+          </div>
+
         </form>
+
+        <p class="mdp_oubier">
+          <a href="#">Mot de passe oublier ?</a>
+        </p>
+
       </div>
 		</main>
 

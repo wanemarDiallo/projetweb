@@ -12,7 +12,7 @@ session_start();
 	<body>
 		<?php include 'header.php'; ?>
 
-		<div class="login" id="login">
+		<div class="login_index" id="login">
 		  <!--Réccuperation de la session-->
 		  <form action="#" method="post" id="form_recherche">
 		    <input type="text" name="recherche" id="recherche" placeholder="faites un recherche"/>

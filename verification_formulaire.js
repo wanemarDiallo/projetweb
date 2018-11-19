@@ -1,13 +1,13 @@
 $(document).ready(function (){
-
-  $('#ins_submit').on("click", function(){
-    var nom = $('#nom').val();
-    estvalide(nom);
+  /**
+    @Interaction et mise en forme des input connexion
+  */
+  $('.connexion>input').on('focus', function(){
+    var label = $(this).prev();
+    label.fadeOut();
   });
-
-  function estvalide(champs){
-    if(!champs.val().match(\^[a-z]$\i)){
-      alert("non valide");
-    }
-  }
+  $('.connexion>input').on('blur', function(){
+    var label = $(this).prev();
+    label.fadeIn();
+  });
 });

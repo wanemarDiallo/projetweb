@@ -61,7 +61,7 @@ header .c:hover, .o:hover, .t:hover, .k:hover, .e:hover, .i:hover, .l:hover{
   box-shadow: 0px 0px 4px white;
 /*  animation: cockteil 2s linear .4s alternate;*/
 }
-.login{
+.login_index{
   display: flex;
   justify-content: space-between;
   margin: 0;
@@ -78,11 +78,11 @@ header .c:hover, .o:hover, .t:hover, .k:hover, .e:hover, .i:hover, .l:hover{
   color:white;
   border-radius: 5px;
 }
-.login > p{
+.login_index > p{
   margin: 0;
   padding: 0;
 }
-.login>p a{
+.login_index>p a{
   display: inline-block;
   padding:5px;
   border: 1px solid white;
@@ -147,35 +147,8 @@ header .c:hover, .o:hover, .t:hover, .k:hover, .e:hover, .i:hover, .l:hover{
 #main_panier{
   width: 20%;
 }
-.main_inscription{
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-}
-#formulaireIns{
-  width: 45%;
-  margin: 0 auto;
-  padding: 5px;
-  border:1px solid #CC8E69;
-}
-#formulaireConnexion{
-  width: 45%;
-  border:1px solid #CC8E69;
-  margin-right: 10px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-/*  background-color: #424558;*/
-}
-.text_connexion{
-  font-size: 0.80em;
-  font-style: oblique;
-  text-align: center;
-}
-#formulaireConnexion>form table {
-  width: 100%;
-}
+
+
 nav{
   margin: 0;
   padding: 0;
@@ -220,33 +193,135 @@ nav{
   background-color: #CC8E69;
   transition: .70s background-color linear;
 }
-td{
+/*Mise en forme de la page inscription_connexion*/
+/************************************************/
+.main_inscription{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+#formulaireConnexion{
+  width: 45%;
+  border:1px solid #CC8E69;
+  margin-right: 10px;
+  padding: 10px;
+}
+#formulaireIns{
+  width: 45%;
+  margin: 0 auto;
   padding: 5px;
+  border:1px solid #CC8E69;
 }
-.colspan{
-  text-align: center;
+
+#formulaireConnexion>form, #formulaireIns>form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.colspan>input, td>input, select{
+.connexion{
+  margin:5px;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+}
+.inscription{
+  position: relative;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-around;
+}
+.connexion>input{
+  border:none;
+  border: 0.01px solid rgba(0,0,255, .75);
+  height: 20px;
+  padding: 10px;
+}
+.inscription>input{
   border: none;
-  border: 1px solid gray;
-  padding: 5px;
-  border-radius: 3px;
-  width: 95%;
+  border: 0.5px solid #CC8E69;
+  padding: 10px;
+  opacity: .50px;
 }
-.buttonSubmit{
-  text-align: center;
+.label_connexion {
+  position: absolute;
+  left: 80px;
+  top: 12px;
+  z-index: 1;
+  font-size: 0.70em;
+  font-style: oblique;
+  opacity: .30;
 }
-.buttonSubmit>input{
+.label_ins{
+  position: absolute;
+  font-size: 0.6em;
+  left:80px;
+  top:12px;
+}
+.label_date{
+  left: 83px;
+}
+.label_tel{
+  left: 95px;
+}
+.label_cdp{
+  left: 83px;
+}
+.label_connexion:hover{
+  cursor: text;
+}
+.span_connexion, .span_ins{
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  margin-right: 1px;
+  font-size: 0.70em;
+  font-style: oblique;
+  background-color:#424558;
   color: white;
-  border: none;
+}
+.span_login{
+    padding: 10px 20px;
+}
+.span_mdp{
+  padding: 10px 9px;
+}
+.span_nom{
+  padding: 10px 23px;
+}
+.span_prenom{
+  padding: 10px 14px;
+}
+.span_mail{
+  padding: 10px 21px;
+}
+.span_cdp{
+  padding: 10px 5px;
+}
+.cdp_ins>input{
+  margin-right: 5px;
+}
+.dateNaiss_ins>input{
+  margin-right:
+}
+.span_date{
+  padding: 10px 10px;
+}
+.span_ville{
+  padding: 10px 25px;
+}
+.tel_ins>input{
+  margin-right: 14px;
+}
+.span_tel{
+  padding: 10px 15px;
+}
+.text_connexion{
+  font-size: 0.80em;
+  font-style: oblique;
   text-align: center;
-  width: 50%;
-  background-color: rgba(0,0,0,.80);
+  opacity: 0.70;
 }
-.buttonSubmit>input:hover{
-  cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.90);
-}
+
 /*Mise en forme la page modifiée*/
 .details_modif{
   width: 60%;
