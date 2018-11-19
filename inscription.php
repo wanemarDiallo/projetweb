@@ -37,48 +37,52 @@ session_start();
 
   /*Enregistrement au cour de l'inscription*/
   if(isset($_POST['envoie'])){
-
-    $login = $_POST['login'];
-    $mdp = $_POST['mdp'];
-    $nom = $_POST['nom'];
-    $prenom = $_POST['prenom'];
-    $sexe = $_POST['sexe'];
-    $mail = $_POST['mail'];
-    $cdp = $_POST['cdp'];
-    $dateNaiss = $_POST['dateNaiss'];
-    $ville = $_POST['ville'];
-    $tel = $_POST['tel'];
-
-    if(!control_login($login)) echo "valuer login non valide";
-    else if(!control_mdp($mdp)) echo "valuer mdp non valide il faut au moins 8 caractères";
-    else if(!control_name($nom, $prenom)) echo "le nom ou prenom saisie n'est pas valide";
-    else if(!control_sexe($sexe)) echo "veuillez renseignez le champ sexe";
-    else if(!control_mail($mail)) echo "mail non valide";
-    else if(!control_cdp($cdp)) echo "cdp non valide";
-    else if(!control_date($dateNaiss)) echo "date de naissance non valide, exemple : 10/10/1998";
-    else if(!control_ville($ville)) echo "le nom de la ville non valide";
-    else if(!control_tel($tel)) echo "numéro de Téléphone non valide";
+    if(!isset($_POST['sexe']) || !control_sexe($_POST['sexe'])) echo "veuillez renseignez le champ sexe";
     else
     {
-        if(!array_key_exists($login, $table_inscris))//verification s'il n'existe pas un login pareil
-        $inscris = array(
-                          $login => array(
-                                      'mdp'=>password_hash($mdp, PASSWORD_DEFAULT),
-                                      'nom'=>$nom,
-                                      'prenom'=>$prenom,
-                                      'sexe'=>$sexe,
-                                      'mail'=>$mail,
-                                      'date' => $dateNaiss,
-                                      'cdp' =>  $cdp,
-                                      'ville' => $ville,
-                                      'tel' =>   $tel
-                          )
-                        );
-        $table_inscris +=$inscris;//ajout du nouveau utilisateur sur la table des inscris
-        file_put_contents($filename, '<?php $table_inscris = '.var_export($table_inscris, true).'; ?>', LOCK_EX);
+      //  echo $_POST['sexe'];
+        $login = $_POST['login'];
+        $mdp = $_POST['mdp'];
+        $nom = $_POST['nom'];
+        $prenom = $_POST['prenom'];
+        $mail = $_POST['mail'];
+        $cdp = $_POST['cdp'];
+        $dateNaiss = $_POST['dateNaiss'];
+        $ville = $_POST['ville'];
+        $tel = $_POST['tel'];
+
+        if(!control_login($login)) echo "valuer login non valide";
+        else if(!control_mdp($mdp)) echo "valuer mdp non valide il faut au moins 8 caractères";
+        else if(!control_name($nom, $prenom)) echo "le nom ou prenom saisie n'est pas valide";
+      //  else if(!control_sexe($sexe)) echo "veuillez renseignez le champ sexe";
+        else if(!control_mail($mail)) echo "mail non valide";
+        else if(!control_cdp($cdp)) echo "cdp non valide";
+        else if(!control_date($dateNaiss)) echo "date de naissance non valide, exemple : 10/10/1998";
+        else if(!control_ville($ville)) echo "le nom de la ville non valide";
+        else if(!control_tel($tel)) echo "numéro de Téléphone non valide";
+        else
+        {
+            if(!array_key_exists($login, $table_inscris))//verification s'il n'existe pas un login pareil
+            $inscris = array(
+                              $login => array(
+                                          'mdp'=>password_hash($mdp, PASSWORD_DEFAULT),
+                                          'nom'=>$nom,
+                                          'prenom'=>$prenom,
+                                          'sexe'=>$_POST['sexe'],
+                                          'mail'=>$mail,
+                                          'date' => $dateNaiss,
+                                          'cdp' =>  $cdp,
+                                          'ville' => $ville,
+                                          'tel' =>   $tel
+                              )
+                            );
+            $table_inscris +=$inscris;//ajout du nouveau utilisateur sur la table des inscris
+            file_put_contents($filename, '<?php $table_inscris = '.var_export($table_inscris, true).'; ?>', LOCK_EX);
+        }
+
+      }
     }
 
-  }
   ////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////
   function control_login($data_login){
@@ -159,63 +163,66 @@ session_start();
             <label for="sexe_h">M.</label>
             <input type="radio" name="sexe" id="sexe_h" value="Homme">
             <label for="sexe_f">Mm</label>
-            <input type="radio" name="sexe" id="sexe_f" value="femme">
+            <input type="radio" name="sexe" id="sexe_f" value="Femme">
           </div>
 
           <div class="login_ins inscription">
-            <label for="login_ins" class="label_ins">Login</label>
             <span class="span_ins span_login">Login</span>
+            <label for="login_ins" class="label_ins">Login</label>
             <input type="text" name="login" id="login_ins">
           </div>
 
           <div class="mdp_ins inscription">
-            <label for="mdp_ins" class="label_ins">Password</label>
             <span class="span_ins span_mdp">Password</span>
+            <label for="mdp_ins" class="label_ins">Password</label>
             <input type="password" name="mdp" id="mdp_ins">
           </div>
 
           <div class="nom_ins inscription">
-            <label for="nom_ins" class="label_ins">Nom</label>
             <span class="span_ins span_nom">Nom</span>
-            <input type="text" name="login" id="nom_ins">
+            <label for="nom_ins" class="label_ins">Nom</label>
+            <input type="text" name="nom" id="nom_ins">
           </div>
 
           <div class="prenom_ins inscription">
-            <label for="prenom_ins" class="label_ins">Prénom</label>
             <span class="span_ins span_prenom">Prénom</span>
-            <input type="text" name="login" id="prenom_ins">
+            <label for="prenom_ins" class="label_ins">Prénom</label>
+            <input type="text" name="prenom" id="prenom_ins">
           </div>
 
           <div class="mail_ins inscription">
-            <label for="mail_ins" class="label_ins">email</label>
             <span class="span_ins span_mail">email</span>
+            <label for="mail_ins" class="label_ins">email</label>
             <input type="email" name="mail" id="mail_ins">
           </div>
 
           <div class="dateNaiss_ins inscription">
+            <span class="span_ins span_date">Né(e) le</span>
             <label for="dateNaiss_ins" class="label_ins label_date">Date de naissance</label>
-            <span class="span_ins span_date">Naissance</span>
             <input type="text" name="dateNaiss" id="dateNaiss_ins">
           </div>
 
           <div class="cdp_ins inscription">
-            <label for="cdp_ins" class="label_ins label_cdp">Code postal</label>
             <span class="span_ins span_cdp">Code postal</span>
+            <label for="cdp_ins" class="label_ins label_cdp">Code postal</label>
             <input type="text" name="cdp" id="cdp_ins">
           </div>
 
           <div class="ville_ins inscription">
-            <label for="ville_ins" class="label_ins">Ville</label>
             <span class="span_ins span_ville">Ville</span>
+            <label for="ville_ins" class="label_ins">Ville</label>
             <input type="text" name="ville" id="ville_ins">
           </div>
 
           <div class="tel_ins inscription">
-            <label for="tel_ins" class="label_ins label_tel">Téléphone</label>
             <span class="span_ins span_tel">Téléphone</span>
+            <label for="tel_ins" class="label_ins label_tel">Téléphone</label>
             <input type="text" name="tel" id="tel_ins">
           </div>
 
+          <div class="submit_ins inscription">
+            <input type="submit" name="envoie" value="Envoyer">
+          </div>
 				</form>
 			</div>
 
@@ -237,7 +244,7 @@ session_start();
           </div>
 
           <div class="submit_connexion">
-            <input type="submit" name="connecter" value="connecion"/>
+            <input type="submit" name="connecter" value="connexion"/>
           </div>
 
         </form>
