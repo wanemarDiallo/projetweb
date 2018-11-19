@@ -223,6 +223,7 @@ nav{
   position: relative;
   display: flex;
   justify-content: space-around;
+    
 }
 .inscription{
   position: relative;
@@ -233,7 +234,6 @@ nav{
 .connexion>input{
   border:none;
   border: 0.01px solid rgba(0,0,255, .75);
-  /*height: 20px;*/
   padding: 10px;
 }
 .inscription>input{
