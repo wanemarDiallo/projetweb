@@ -1,14 +1,14 @@
 <?php $table_inscris = array (
-  'you' =>
+  'aniki07' => 
   array (
-    'mdp' => 'mar224',
-    'nom' => 'oihanidou',
-    'prenom' => 'mar',
-    'sexe' => '',
-    'mail' => 'you@gmail.com',
-    'date' => '1111111',
+    'mdp' => '$2y$10$H8SEadTst5ZCi.E1NfmfPeiLqoGxisPM08VFM9vsaCZTdnmZbv6py',
+    'nom' => 'zitoun',
+    'prenom' => 'Brahim',
+    'sexe' => 'Homme',
+    'mail' => 'zitoun.brahim@sfr-bis.fr',
+    'date' => '11/10/1999',
     'cdp' => '57000',
-    'ville' => 'metz',
-    'tel' => '455555',
+    'ville' => 'Metz',
+    'tel' => '0714758499',
   ),
 ); ?>

@@ -35,27 +35,43 @@ file_put_contents($filename, '<?php $table_inscris = '.var_export($table_inscris
     <main class="main_Modif">
       <details open class="details_modif">
         <summary>Votre profil
-          <?php
-            if($_SESSION['login'][$login]['sexe']==='Homme')
-            {echo 'M. '.$_SESSION['login'][$login]['nom'].' ('.$login.')';}
-             else{echo 'Mm '.$_SESSION['login'][$login]['nom'].' ('.$login.')';}
-          ?>
+            <?php
+              if($_SESSION['login'][$login]['sexe']==='Homme')
+              {
+                ?>
+                  <span class="modif_nom"> <?php echo ' M. '.strtoupper($_SESSION['login'][$login]['nom']).' "'.$login.' "';?> </span>
+                <?php
+              }
+               else
+               {
+                 ?>
+                   <span class="modif_nom"> <?php echo ' Mm. '.strtoupper($_SESSION['login'][$login]['nom']).' " '.$login.' "';?> </span>
+                 <?php
+               }
+            ?>
         </summary>
-        <table>
             <?php
               foreach ($_SESSION['login'][$login] as $key => $value) {
                 if($key!=='mdp')
                 {
                   ?>
-                  <tr>
-                    <th><?php echo $key ?></th>
-                    <td><?php echo $value?></td>
-                  </tr>
+                  <div class="datas_profil">
+                    <p class="datas_name">
+                      <?php
+                        if(strcmp($key, 'prenom')===0) echo "Prénom";
+                        else if(strcmp($key, 'mail')===0) echo "email";
+                        else if(strcmp($key, 'cdp')===0) echo "Code postal";
+                        else if(strcmp($key, 'date')===0) echo "Date de naissance";
+                        else if(strcmp($key, 'tel')===0) echo "Téléphone ";
+                        else echo $key;
+                       ?>
+                    </p>
+                    <p class="datas_values"><?php echo $value?></p>
+                  </div>
                   <?php
                 }
               }
             ?>
-        </table>
       </details>
       <details open class="details_modif">
         <summary>les données possibles d'être modifiées</summary>
@@ -74,7 +90,7 @@ file_put_contents($filename, '<?php $table_inscris = '.var_export($table_inscris
             </optgroup>
           </select>
           <input type="text" name="modif" placeholder="nom" class="modif_input"/>
-          <input type="submit" name="modif_submit" value="modifier" title="Modifier"/>
+          <input type="submit" name="modif_submit" value="Modifier" title="Modifier"/>
         </form>
       </details>
     <main>

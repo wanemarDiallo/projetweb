@@ -8,6 +8,7 @@ $(document).ready(function (){
   });
   $('.connexion>input, .inscription>input').on('blur', function(){
     var label = $(this).prev();
-    label.fadeIn();
+    if($(this).val()=='') label.fadeIn();
   });
+
 });

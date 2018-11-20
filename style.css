@@ -59,7 +59,6 @@ header>a{
 }
 header .c:hover, .o:hover, .t:hover, .k:hover, .e:hover, .i:hover, .l:hover{
   box-shadow: 0px 0px 4px white;
-/*  animation: cockteil 2s linear .4s alternate;*/
 }
 .login_index{
   display: flex;
@@ -67,16 +66,61 @@ header .c:hover, .o:hover, .t:hover, .k:hover, .e:hover, .i:hover, .l:hover{
   margin: 0;
   padding: 5px;
   position: relative;
+  margin-top: 5px;
+  margin-bottom: 1px;
 }
-/*#button_recherche{
-  background: url(search.svg) no-repeat;
+#form_recherche{
+  position: relative;
+}
+#button_recherche{
   border: none;
-}*/
+  background-color: #424558;
+  position: absolute;
+  left: 83%
+  top:3%;
+  padding: 3.5px;
+  cursor: pointer;
+}
+#button_recherche:hover{
+  background-color: rgba(66,69,88,.90)
+}
+#recherche{
+  border: none;
+  padding: 10px;
+  border: 1px solid #CC8E69;
+  border-right: none;
+}
+/* -----
+SVG Icons - svgicons.sparkk.fr
+----- */
+
+.svg-icon {
+  width: 2em;
+  height: 2em;
+}
+
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+  fill: #fff;
+}
+
+.svg-icon circle {
+  stroke: #fff;
+  stroke-width: 1;
+}
+/************************************************************
+*************************************************************/
 #connexion_button{
   text-decoration: none;
   background-color: #CC8E69;
   color:white;
-  border-radius: 5px;
+  border: none;
+}
+#connexion_button:hover{
+  background-color: rgba(204, 142, 105, .80);
+  transition: .10s background-color linear;
+  cursor:pointer;
 }
 .login_index > p{
   margin: 0;
@@ -95,6 +139,38 @@ header .c:hover, .o:hover, .t:hover, .k:hover, .e:hover, .i:hover, .l:hover{
   bottom: 0;
   right: 0;
   width: 10%;
+}
+.avatar{
+  display: flex;
+  justify-content: space-around;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+.avatar a{
+  align-self: flex-end;
+  position: absolute;
+  bottom: 0;
+  top:-42px;
+  left: -7px;
+}
+.avatar a>img{
+  width: 47px;
+  height: 47px;
+}
+.avatar a, .user_login{
+  display: block;
+  width: 50%;
+  padding: 0;
+  margin: 0;
+}
+.user_login{
+  align-self: center;
+  margin-top: 3px;
+  position: absolute;
+  right: 20px;
+  top:-30px;
+  font-size: 0.80em;
 }
 #profil>li{
   list-style: none;
@@ -125,11 +201,11 @@ header .c:hover, .o:hover, .t:hover, .k:hover, .e:hover, .i:hover, .l:hover{
 }
 #detail_profil>li a{
   text-decoration: none;
-  color: black;
+  color: white;
 }
 #detail_profil>li:hover{
-  background-color: white;
-  color: black;
+  background-color: rgba(255,255,255,.15);
+  color: white;
 }
 #main_index{
   display: flex;
@@ -209,31 +285,37 @@ nav{
 #formulaireIns{
   width: 45%;
   margin: 0 auto;
-  padding: 5px;
   border:1px solid #CC8E69;
 }
 
-#formulaireConnexion>form, #formulaireIns>form{
+#formulaireConnexion>form{
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+#formulaireIns>form{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 10px;
+}
 .connexion{
+  width: 100%;
   margin:5px;
   position: relative;
   display: flex;
-  justify-content: space-around;
-    
+  justify-content: center;
 }
 .inscription{
+  width: 100%;
   position: relative;
   margin-bottom: 5px;
   display: flex;
-  justify-content: space-around;
+  align-items: flex-start;
 }
 .connexion>input{
   border:none;
-  border: 0.01px solid rgba(0,0,255, .75);
+  border: 0.1px solid #CC8E69;;
   padding: 10px;
 }
 .inscription>input{
@@ -242,84 +324,118 @@ nav{
   padding: 10px;
   opacity: .50px;
 }
+.sexe_ins{
+  width: 50%;
+  margin: 5px 0;
+  align-self: flex-start;
+  display: flex;
+  justify-content: center;
+}
+.sexe_ins>p{ /*sexe*/
+  margin: 0;
+  padding: 0;
+  font-size: 0.70em;
+  opacity:.80;
+  padding: 5px;
+}
+.submit_ins, .submit_connexion{
+  width: 44%;
+  margin: 10px 0;
+  margin-left: 14%;
+}
+.submit_connexion>input[type="submit"], .submit_ins>input[type="submit"]{
+  display: inline-block;
+  width: 100%;
+  padding: 10px;
+  background-color:#CC8E69;
+  color: white;
+  border: none;
+}
+.submit_connexion>input[type="submit"]:hover, .submit_ins>input[type="submit"]:hover{
+  cursor: pointer;
+  background-color: rgba(204, 142, 105, .80);
+}
+.mdp_oubier{
+  text-align: center;
+  width: 44%;
+  margin: 0 auto;
+  margin-left: 35%;
+}
+.mdp_oubier>a{
+  text-decoration: none;
+  font-size: 0.70em;
+  padding: 5px;
+
+}
+.mdp_oubier>a:hover{
+  color: #CC8E69;
+}
+input[type="radio"] {
+    display:none;
+}
+input[type="radio"] + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:-2px 10px 0 0;
+    vertical-align:middle;
+    background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/check_radio_sheet.png) -38px top no-repeat;
+    cursor:pointer;
+}
+input[type="radio"]:checked + label span {
+    background:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/check_radio_sheet.png) -57px top no-repeat;
+}
 .label_connexion {
   position: absolute;
-  left: 80px;
+  left: 38%;
   top: 12px;
   z-index: 1;
-  font-size: 0.70em;
+  font-size: 0.80em;
   font-style: oblique;
-  opacity: .30;
+  opacity: .40;
 }
-.label_ins{
-  position: absolute;
-  font-size: 0.6em;
-  left:80px;
-  top:12px;
-}
-.label_date{
-  left: 83px;
-}
-.label_tel{
-  left: 95px;
-}
-.label_cdp{
-  left: 83px;
-}
-.label_connexion:hover{
+.label_connexion:hover, .label_ins:hover{
   cursor: text;
 }
 .span_connexion, .span_ins{
-  display: inline-block;
+  display: block;
+  width: 10%;
   margin: 0;
   padding: 0;
   margin-right: 1px;
   font-size: 0.70em;
   font-style: oblique;
   background-color:#424558;
+  padding: 12px;
   color: white;
+  text-align: right;
 }
-.span_login{
-    padding: 10px 20px;
-}
-.span_mdp{
-  padding: 10px 9px;
-}
-.span_nom{
-  padding: 10px 23px;
-}
-.span_prenom{
-  padding: 10px 14px;
-}
-.span_mail{
-  padding: 10px 21px;
-}
-.span_cdp{
-  padding: 10px 5px;
-}
-.cdp_ins>input{
-  margin-right: 5px;
-}
-.dateNaiss_ins>input{
-  margin-right:
-}
-.span_date{
-  padding: 10px 10px;
-}
-.span_ville{
-  padding: 10px 25px;
-}
-.tel_ins>input{
-  margin-right: 14px;
-}
-.span_tel{
-  padding: 10px 15px;
+.label_ins{
+  position: absolute;
+  font-size: 0.70em;
+  top:12px;
+  left: 16%;
+  z-index: 1;
+  font-size: 0.70em;
+  font-style: oblique;
+  opacity: .40;
 }
 .text_connexion{
   font-size: 0.80em;
   font-style: oblique;
   text-align: center;
   opacity: 0.70;
+}
+.siError{
+  display: none;
+  border: 1px solid red;
+  margin-left: 3px;
+  padding: 10px;
+  font-size: 0.70em;
+  opacity: .90;
+  font-style: oblique;
+  color: red;
+  transition: .50s color linear;
 }
 
 /*Mise en forme la page modifiée*/
@@ -330,22 +446,54 @@ nav{
   margin-top: 5px;
 }
 .details_modif summary{
-  background: #8fafc8;
+  background: #424558;
   padding: 5px;
+  margin-bottom: 5px;
   border-radius: 3px;
+  color: white;
+  font-size: 0.80em
+}
+.modif_nom{
+  font-weight: bold;
+  opacity: .90;
 }
 .modif_input, .details_modif form input[type="submit"], .data_modif{
   margin: 5px;
   border: none;
-  border: 1px solid #8fafc8;
   width: -webkit-fill-available;
   width: -moz-available;
   text-align: -webkit-center;
   text-align: -moz-center;
 }
+.datas_profil{
+display: flex;
+justify-content: space-around;
+}
+.datas_profil>p{
+  margin: 0;
+  padding: 0;
+  padding: 10px;
+  border: 1px solid gray;
+  margin-bottom: 3px;
+}
+.datas_name{
+  width: 20%;
+  font-size: 0.80em;
+  background-color: rgba(66, 69, 88);
+  color: white;
+}
+.datas_name::first-letter{
+  text-transform: uppercase;
+}
+.datas_values{
+  width: 80%;
+  font-size: 0.80em;
+}
 .data_modif{
   padding: 10px;
   font-style: oblique;
+  border: 1px solid #CC8E69;
+  background-color: rgba(255, 255, 255, .15);
 }
 .data_info{
   margin: 0;
@@ -355,15 +503,22 @@ nav{
   font-size: 0.8em;
 }
 .modif_input{
-    padding: 5px;
+  padding: 10px;
+  border: 1px solid #CC8E69;
+}
+.details_modif form{
+  width: 50%;
+  margin: 10px auto;
 }
 .details_modif form input[type="submit"]{
   font-size: small;
-  font-style: oblique;
-  padding: 5px;
-  background-color:  #5cc89a ;
+  padding: 10px;
+  background-color: #CC8E69;
+  border: none;
+  color: white;
+
 }
 .details_modif form input[type="submit"]:hover{
-  background-color:  #1bc67e ;
+  background-color: rgba(204, 142, 105, .80);
   cursor: pointer;
 }
