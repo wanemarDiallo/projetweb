@@ -78,10 +78,33 @@ session_start();
 			 </ul>
 			</div>
 			<div id="main_contenu">
-				<p>les recettes</p>
+				<p>Affiche des recettes</p>
+
+				<?php if(isset($_SESSION['nomRecette'])) echo $_SESSION['nomRecette']; ?>
 			</div>
 			<div id="main_panier">
-				<p>liste des choix</p>
+				<p>liste des recettes</p>
+
+				<?php
+				 	function afficherLienRecette($element, &$Recettes, &$Hierarchie)
+					{
+						foreach ($Recettes as $clef => $valeur) {
+							if(in_array($element, $valeur["index"]))
+							{
+								?>
+									<a href="afficheRecette.php?titreRecettes=<?php echo $valeur["titre"]?>" class="liens"><?php echo $valeur["titre"]?></a>
+								<?php
+							}
+						}
+						if(array_key_exists('sous-categorie', $Hierarchie[$element]))
+						{
+							foreach ($Hierarchie[$element]['sous-categorie'] as $clef => $valeur) {
+								afficherLienRecette($valeur, $Recettes, $Hierarchie);
+							}
+						}
+					}
+					if($_GET['valeur']!=="Aliment") afficherLienRecette($_GET['valeur'], $Recettes, $Hierarchie);
+				 ?>
 			</div>
 		</main>
 		<footer></footer>

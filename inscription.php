@@ -244,7 +244,7 @@ session_start();
           </div>
 
           <div class="submit_ins">
-            <input type="submit" name="envoie" value="Envoyer">
+            <input type="submit" name="envoie"  value="Envoyer">
           </div>
 				</form>
 			</div>
@@ -252,24 +252,22 @@ session_start();
       <!--Formulaire de connexion-->
       <div id="formulaireConnexion">
         <p class="text_connexion">Vous êtes déjà incris, renseignez votre login et mot de passe pour vous connecter</p>
-        <form action="" method="post">
+        <form action="" method="post" id="connexion">
 
           <div class="login connexion">
             <span class="span_connexion span_login">Login</span>
             <label for="login" class="label_connexion">Login</label>
             <input type="text" name="login" id="login">
-            <span class="siError"></span>
           </div>
 
           <div class="mdp connexion">
             <span class="span_connexion span_mdp">Password</span>
             <label for="mdp" class="label_connexion">Password</label>
             <input type="password" name="mdp" id="mdp">
-            <span class="siError"></span>
           </div>
 
           <div class="submit_connexion">
-            <input type="submit" name="connecter" value="connexion"/>
+            <input type="submit" name="connecter" id="connecter" value="connexion"/>
           </div>
 
         </form>
@@ -278,6 +276,7 @@ session_start();
           <a href="#">Mot de passe oublier ?</a>
         </p>
 
+        <p class="siError err_log err_mdp"></p>
       </div>
 		</main>
 

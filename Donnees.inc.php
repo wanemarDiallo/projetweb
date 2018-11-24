@@ -14,7 +14,7 @@
   ),
   1 =>
   array (
-    'titre' => 'Aperol Spritz : cocktail italien pétillant',
+    'titre' => 'Aperol Spritei : cocktail italien pétillant',
     'ingredients' => '1 verre d\'aperol|3 verres de vin blanc pétillant type prosecco|5 glaçons|1 orange sanguine|2 verres d\'eau pétillante',
     'preparation' => 'Préparer la quantité de cocktail souhaitée en respectant les proportions ! Garnir de glaçons et d\'un morceau d\'orange (sanguine si possible). Santé !',
     'index' =>
