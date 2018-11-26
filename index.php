@@ -119,17 +119,12 @@ session_start();
 				<?php
 				 	function afficherLienRecette($element, &$Recettes, &$Hierarchie)
 					{
-<<<<<<< HEAD
-=======
-						
->>>>>>> 9e22a3e49e260f1ff55345edddf24412173d0f80
 						if(array_key_exists('sous-categorie', $Hierarchie[$element]))
 						{
 							foreach ($Hierarchie[$element]['sous-categorie'] as $clef => $valeur) {
 								afficherLienRecette($valeur, $Recettes, $Hierarchie);
 							}
 						}
-<<<<<<< HEAD
 						else
 					 	{
 							foreach ($Recettes as $clef => $valeur) {
@@ -148,8 +143,7 @@ session_start();
 						<h2 class="listeRecettes">liste des recettes</h2>
 						<?php
 						 afficherLienRecette($_GET['valeur'], $Recettes, $Hierarchie);
->>>>>>> 9e22a3e49e260f1ff55345edddf24412173d0f80
-					}
+					 }
 				 ?>
 			</div>
 		</main>

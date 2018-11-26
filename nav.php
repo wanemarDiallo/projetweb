@@ -13,7 +13,6 @@
         array_push($_SESSION['chemin'], $_GET['valeur']);
 
         else{
-<<<<<<< HEAD
         //suppression des éléments lien dans le chemin absolu quand on clique sur un lien dans le chemin
         /* On recupère la taille du tableau, on recupère la position de la liste d'élément que l'on veut,
         Ensuite on boucle grace à la position de l'élément dans le tableau jusqu'à la taille du tableau,
@@ -22,11 +21,10 @@
             $pos = array_search($_GET['valeur'], $_SESSION['chemin']);
 
               for($i=$size - 1;$i>$pos;$i--){
->>>>>>> 9e22a3e49e260f1ff55345edddf24412173d0f80
                    array_pop($_SESSION['chemin']);
               }
 
-            }
+          }
         ?>
       <li>
         <?php
