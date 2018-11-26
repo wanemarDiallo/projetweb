@@ -20,11 +20,8 @@
             $size = sizeof($_SESSION['chemin']);
             $pos = array_search($_GET['valeur'], $_SESSION['chemin']);
 
-              for($i=$pos;$i<$size;$i++){
-                  if ($pos < $size - 1){
+              for($i=$size - 1;$i>$pos;$i--){
                    array_pop($_SESSION['chemin']);
-                   $size--;
-                  }
               }
 
             }
