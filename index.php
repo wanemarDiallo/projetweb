@@ -88,20 +88,25 @@ session_start();
 				<?php
 				 	function afficherLienRecette($element, &$Recettes, &$Hierarchie)
 					{
-						foreach ($Recettes as $clef => $valeur) {
-							if(in_array($element, $valeur["index"]))
-							{
-								?>
-									<a href="afficheRecette.php?titreRecettes=<?php echo $valeur["titre"]?>" class="liens"><?php echo $valeur["titre"]?></a>
-								<?php
-							}
-						}
+						
 						if(array_key_exists('sous-categorie', $Hierarchie[$element]))
 						{
 							foreach ($Hierarchie[$element]['sous-categorie'] as $clef => $valeur) {
 								afficherLienRecette($valeur, $Recettes, $Hierarchie);
 							}
 						}
+                        else
+                        {
+                            foreach ($Recettes as $clef => $valeur) {
+							if(in_array($element, $valeur["index"]))
+							{
+								?>
+									<a href="afficheRecette.php?titreRecettes=<?php echo $valeur["titre"]?>" class="liens"><?php echo $valeur["titre"]?></a>
+								<?php
+							}
+						}    
+                        }
+                        
 					}
 					if($_GET['valeur']!=="Aliment") afficherLienRecette($_GET['valeur'], $Recettes, $Hierarchie);
 				 ?>
