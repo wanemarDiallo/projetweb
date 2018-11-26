@@ -13,28 +13,6 @@ session_start();
   if(!isset($table_inscris)) $table_inscris = array();
 /////////////////////////////////////////////////////////
 
-  /*test connexion */
-  if(isset($_POST['connecter'])){
-      $login = $_POST['login'];
-      $mdp = $_POST['mdp']; // password_hash($_POST['mdp'], PASSWORD_DEFAULT);
-      if(array_key_exists($login, $table_inscris))
-      {
-        foreach ($table_inscris as $clef => $value) {
-          if(strcmp($clef,$login)===0 && password_verify($mdp, $value['mdp']))
-          {
-            $_SESSION['login'] = array($clef => $value);
-            header('Location:index.php');
-            //break;
-          }
-        }
-      }
-      else {
-        echo "vous êtes pas inscris, veuile <br>";
-      }
-  }
-//////////////////////////////////////////////////////
-/////////////////////////////////////////////////////
-
   /*Enregistrement au cour de l'inscription*/
   if(isset($_POST['envoie'])){
     if(!isset($_POST['sexe']) || !control_sexe($_POST['sexe'])) echo "veuillez renseignez le champ sexe";
@@ -252,7 +230,7 @@ session_start();
       <!--Formulaire de connexion-->
       <div id="formulaireConnexion">
         <p class="text_connexion">Vous êtes déjà incris, renseignez votre login et mot de passe pour vous connecter</p>
-        <form action="" method="post" id="connexion">
+        <form action="connexion.php" method="post" id="connexion">
 
           <div class="login connexion">
             <span class="span_connexion span_login">Login</span>

@@ -17,14 +17,10 @@
         /* On recupère la taille du tableau, on recupère la position de la liste d'élément que l'on veut,
         Ensuite on boucle grace à la position de l'élément dans le tableau jusqu'à la taille du tableau,
         si l'indice est inferieur à la taille du tableau -1, on dépile le dernier element du tableau*/
-            $size = sizeof($_SESSION['chemin']);
+            $size = count($_SESSION['chemin']);
             $pos = array_search($_GET['valeur'], $_SESSION['chemin']);
-
-              for($i=$pos;$i<$size;$i++){
-                  if ($pos < $size - 1){
+              for($i=$size-1;$i>$pos;$i--){
                    array_pop($_SESSION['chemin']);
-                   $size--;
-                  }
               }
 
             }

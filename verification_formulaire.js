@@ -27,6 +27,13 @@ $(document).ready(function (){
     else{
       $('.err_log, .err_mdp').empty().hide();
       $(this).css('border-color', '#CC8E69');
+      $.post('connexion.php', {'login': log, 'mdp': mdp}, function(data){
+          if(data==0){
+          $('.err_mdp').empty().hide().append("Vous êtes pas inscris.").fadeIn();
+          }else {
+            $('#connexion').submit();
+          }
+      });
     }
   });
 

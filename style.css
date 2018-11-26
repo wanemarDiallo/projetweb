@@ -76,10 +76,10 @@ header .c:hover, .o:hover, .t:hover, .k:hover, .e:hover, .i:hover, .l:hover{
   border: none;
   background-color: #424558;
   position: absolute;
-  left: 83%
-  top:3%;
-  padding: 3.5px;
+  left: 86%;
+  padding:2.5px;
   cursor: pointer;
+  border: 1px solid #CC8E69;
 }
 #button_recherche:hover{
   background-color: rgba(66,69,88,.90)
@@ -92,6 +92,7 @@ header .c:hover, .o:hover, .t:hover, .k:hover, .e:hover, .i:hover, .l:hover{
 }
 /* -----
 SVG Icons - svgicons.sparkk.fr
+search icon
 ----- */
 
 .svg-icon {
@@ -107,6 +108,29 @@ SVG Icons - svgicons.sparkk.fr
 
 .svg-icon circle {
   stroke: #fff;
+  stroke-width: 1;
+}
+
+/* -----
+SVG Icons - svgicons.sparkk.fr
+coeur icon
+----- */
+
+.svg-icon-favorie {
+  width: 1em;
+  height: 1em;
+  flex-direction:row-reverse;
+  align-self: flex-end;
+}
+
+.svg-icon-favorie path,
+.svg-icon-favorie  polygon,
+.svg-icon-favorie  rect {
+  fill: red;
+}
+
+.svg-icon-favorie  circle {
+  stroke: red;
   stroke-width: 1;
 }
 /************************************************************
@@ -176,6 +200,40 @@ SVG Icons - svgicons.sparkk.fr
   display: block;
   text-decoration: none;
   font-size: 0.70em;
+  color: blue;
+}
+.liens:hover{
+  color: #CC8E69;
+  text-decoration: underline;
+}
+.titre{
+  width: 70%;
+  margin: auto;
+  font-weight: lighter;
+  font-size: 1.5em;
+  padding: 5px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.listeRecettes{
+  font-weight: 400;
+  font-size: 1.2em;
+  text-align: left;
+}
+.imageRecette{
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.detailsRecettes>p{
+  font-size: 0.90em;
+}
+.ingredients, .preparation{
+  margin-right: 10px;
+  font-weight: bold;
+  font-size: 1em;
+  opacity: 0.90;
 }
 #profil>li{
   list-style: none;
@@ -225,7 +283,7 @@ SVG Icons - svgicons.sparkk.fr
   width: 60%;
   padding: 5px;
 }
-#main_panier{
+#main_recette{
   width: 20%;
 }
 
