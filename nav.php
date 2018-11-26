@@ -13,10 +13,8 @@
         array_push($_SESSION['chemin'], $_GET['valeur']);
 
         else{
-        //suppression des éléments lien dans le chemin absolu quand on clique sur un lien dans le chemin
-        /* On recupère la taille du tableau, on recupère la position de la liste d'élément que l'on veut,
-        Ensuite on boucle grace à la position de l'élément dans le tableau jusqu'à la taille du tableau,
-        si l'indice est inferieur à la taille du tableau -1, on dépile le dernier element du tableau*/
+       // Supression des éléméent du tableau quand on clique sur une case plus haute dans la hiérarchie 
+            /*on parcours le tableau de la fin jusqu'a la position de l'élément et on supprime */
             $size = sizeof($_SESSION['chemin']);
             $pos = array_search($_GET['valeur'], $_SESSION['chemin']);
 
