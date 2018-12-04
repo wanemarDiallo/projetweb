@@ -18,6 +18,11 @@
         <input type="password" name="">
       </div>
       <div>
+        <label for=""></label>
+        <span></span>
+        <input type="password" name="">
+      </div>
+      <div>
         <input type="submit" name="" value="valider">
       </div>
     </form>

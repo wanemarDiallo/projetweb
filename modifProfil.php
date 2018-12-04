@@ -52,6 +52,7 @@ file_put_contents($filename, '<?php $table_inscris = '.var_export($table_inscris
         </summary>
             <?php
               foreach ($_SESSION['login'][$login] as $key => $value) {
+
                 if($key!=='mdp')
                 {
                   ?>
@@ -66,32 +67,25 @@ file_put_contents($filename, '<?php $table_inscris = '.var_export($table_inscris
                         else echo $key;
                        ?>
                     </p>
-                    <p class="datas_values"><?php echo $value?></p>
+                    <p class="datas_values">
+                      <?php
+                        ?>
+                        <form action="" method="post">
+                          <div>
+                            <label for=""></label>
+                            <span></span>
+                            <input type="" name="">
+                          </div>
+                        </form>
+                        <?php
+                      ?>
+
+                    </p>
                   </div>
                   <?php
                 }
               }
             ?>
-      </details>
-      <details open class="details_modif">
-        <summary>les données possibles d'être modifiées</summary>
-        <form action="#" method="post">
-          <p class="data_info">Selectionnez l'information à modifier *</p>
-          <select class="data_modif" id="select_modif" name="data" title="Selectionnez le champ">
-            <optgroup label="vos données"><!--indique-->
-              <option value="nom">Nom</option>
-              <option value="prenom">Prénom</option>
-              <option value="mail">E-mail</option>
-              <option value="tel">Téléphone</option>
-            </optgroup>
-            <optgroup label="Adresse">
-              <option value="cdp">Code postal</option>
-              <option value="ville">ville</option>
-            </optgroup>
-          </select>
-          <input type="text" name="modif" placeholder="nom" class="modif_input"/>
-          <input type="submit" name="modif_submit" value="Modifier" title="Modifier"/>
-        </form>
       </details>
     <main>
       <script src="jquery-3.3.1.min.js"></script>

@@ -2703,7 +2703,9 @@
   ),
   'Get 27' =>
   array (
-    'super-categorie' =>
+    'supe
+
+    r-categorie' =>
     array (
       0 => 'Autre liqueur',
     ),

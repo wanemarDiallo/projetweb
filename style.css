@@ -70,14 +70,13 @@ header .c:hover, .o:hover, .t:hover, .k:hover, .e:hover, .i:hover, .l:hover{
   margin-bottom: 1px;
 }
 #form_recherche{
-  position: relative;
+  display: flex;
+  width: 50%;
+  justify-content: space-around;
 }
 #button_recherche{
   border: none;
   background-color: #424558;
-  position: absolute;
-  left: 86%;
-  padding:2.5px;
   cursor: pointer;
   border: 1px solid #CC8E69;
 }
@@ -88,29 +87,17 @@ header .c:hover, .o:hover, .t:hover, .k:hover, .e:hover, .i:hover, .l:hover{
   border: none;
   padding: 10px;
   border: 1px solid #CC8E69;
-  border-right: none;
+  width: 94%;
 }
 /* -----
-SVG Icons - svgicons.sparkk.fr
+SVG Icons -
 search icon
 ----- */
-
-.svg-icon {
-  width: 2em;
-  height: 2em;
+#Capa_1{
+  width: 20px;
+  height: 20px;
+  fill: white;
 }
-
-.svg-icon path,
-.svg-icon polygon,
-.svg-icon rect {
-  fill: #fff;
-}
-
-.svg-icon circle {
-  stroke: #fff;
-  stroke-width: 1;
-}
-
 /* -----
 SVG Icons - svgicons.sparkk.fr
 coeur icon
@@ -197,7 +184,6 @@ coeur icon
   font-size: 0.80em;
 }
 .liens{
-  display: block;
   text-decoration: none;
   font-size: 0.70em;
   color: blue;
@@ -206,34 +192,14 @@ coeur icon
   color: #CC8E69;
   text-decoration: underline;
 }
-.titre{
-  width: 70%;
-  margin: auto;
-  font-weight: lighter;
-  font-size: 1.5em;
-  padding: 5px;
-  text-align: center;
-  text-transform: uppercase;
-}
-.listeRecettes{
-  font-weight: 400;
-  font-size: 1.2em;
-  text-align: left;
-}
-.imageRecette{
-  display: flex;
-  justify-content: center;
-  margin: 10px 0;
-}
-
-.detailsRecettes>p{
-  font-size: 0.90em;
-}
 .ingredients, .preparation{
-  margin-right: 10px;
+  margin: 0;
   font-weight: bold;
-  font-size: 1em;
+  font-size: 0.9em;
   opacity: 0.90;
+}
+.text_recette{
+  font-size: 0.7em;
 }
 #profil>li{
   list-style: none;
@@ -280,14 +246,52 @@ coeur icon
   background-color: #424558;
 }
 #main_contenu{
-  width: 60%;
+  width: 80%;
   padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-around;
 }
-#main_recette{
+.block_recettes{
+  border: 1px solid #CC8E69;
   width: 20%;
+  margin: 5px 0px;
+  display: flex;
+  flex-wrap: wrap;
 }
+.block_recettes>.image{
+  text-align: center;
+}
+.block_recettes>.text_recette{
+  align-self: flex-end;
+}
+.block_recettes p{
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+.titre{
+  width: 60%;
+  margin: auto;
+  margin-bottom: 10px;
+  padding: 5px;
+  font-size: small;
+  text-align: center;
+  text-transform: uppercase;
+}
+.hr{
+  width: 60%;
+  margin: auto;
+  display: inline-block;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.buton_favorie{
 
-
+}
+figure{
+  text-align: center;
+}
 nav{
   margin: 0;
   padding: 0;
