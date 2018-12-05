@@ -217,7 +217,7 @@ session_start();
           <div class="tel_ins inscription">
             <span class="span_ins span_tel">Tél</span>
             <label for="tel_ins" class="label_ins label_tel">Téléphone</label>
-            <input type="text" name="tel" id="tel_ins">
+            <input type="tel" name="tel" id="tel_ins">
             <span class="siError"></span>
           </div>
 
@@ -251,7 +251,7 @@ session_start();
         </form>
 
         <p class="mdp_oubier">
-          <a href="#">Mot de passe oublier ?</a>
+          <a href="modifPassword.php">Mot de passe oublier ?</a>
         </p>
 
         <p class="siError err_log err_mdp"></p>

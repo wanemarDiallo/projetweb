@@ -520,72 +520,57 @@ input[type="radio"]:checked + label span {
   color: white;
   font-size: 0.80em
 }
-.modif_nom{
-  font-weight: bold;
-  opacity: .90;
+
+.datas_profil div{
+  display: flex;
+  justify-content: space-between;
 }
-.modif_input, .details_modif form input[type="submit"], .data_modif{
-  margin: 5px;
-  border: none;
-  width: -webkit-fill-available;
-  width: -moz-available;
-  text-align: -webkit-center;
-  text-align: -moz-center;
-}
-.datas_profil{
-display: flex;
-justify-content: space-around;
-}
-.datas_profil>p{
-  margin: 0;
-  padding: 0;
-  padding: 10px;
+.datas_profil #champs label{
   border: 1px solid gray;
-  margin-bottom: 3px;
+  width: 60%;
 }
-.datas_name{
-  width: 20%;
-  font-size: 0.80em;
-  background-color: rgba(66, 69, 88);
+.datas_profil #champs input{
+  margin-right: 1%;
+  margin-bottom: 2px;
+  border: none;
+  border: 1px solid #CC8E69;
+  opacity: 0.8;
+}
+.title_datas{
+  background-color: #424558;
+  display: inline-block;
+  width: 35%;
+  padding: 10px;
   color: white;
 }
-.datas_name::first-letter{
-  text-transform: uppercase;
+#valider{
+  width: 10%;
+  border: none;
+  margin: 20px auto;
 }
-.datas_values{
-  width: 80%;
-  font-size: 0.80em;
-}
-.data_modif{
+#valider>input{
   padding: 10px;
-  font-style: oblique;
-  border: 1px solid #CC8E69;
-  background-color: rgba(255, 255, 255, .15);
+  border: none;
+  background-color: #CC8E69;
+  border: 1px solid white;
 }
-.data_info{
-  margin: 0;
-  padding: 5px;
-  font-size: small;
-  font-style: oblique;
-  font-size: 0.8em;
+#valider>input:hover{
+  background-color: green;
+  border: 1px solid white;
+  color: white;
+  cursor: pointer;
+  transition: 0.4s background-color linear;
 }
-.modif_input{
-  padding: 10px;
-  border: 1px solid #CC8E69;
-}
-.details_modif form{
-  width: 50%;
+.info_modif{
+  width: 60%;
+  padding: 0;
   margin: 10px auto;
 }
-.details_modif form input[type="submit"]{
-  font-size: small;
-  padding: 10px;
-  background-color: #CC8E69;
-  border: none;
-  color: white;
-
+.info_modif>h3{
+  font-size:1em;
+  margin: 0;
+  padding: 0;
 }
-.details_modif form input[type="submit"]:hover{
-  background-color: rgba(204, 142, 105, .80);
-  cursor: pointer;
+.info_modif>p{
+  font-size: 0.8em;
 }

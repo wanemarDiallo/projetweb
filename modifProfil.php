@@ -5,22 +5,31 @@ $filename = "lesInscris.php";
 include('lesInscris.php');
 
 $login = key($_SESSION['login']);//on reccupère le login du user
-if(isset($_POST['modif_submit'])){
-  $donnee = $_POST['modif'];
-  $champ = $_POST['data'];
-  $_SESSION['login'][$login][$champ] = $donnee;
+if(isset($_POST['envoie'])){
+  
 }
 
 $table_inscris = array_merge($table_inscris,$_SESSION['login'] );//ajout du nouveau utilisateur sur la table des inscris
-/*foreach ($table_inscris as $key => $value) {
-    if($key === $login){
-      foreach ($value as $key => $value2) {
-        echo $key .' => '.$value2.'<br>';
-      }
-
-    }
-}*/
 file_put_contents($filename, '<?php $table_inscris = '.var_export($table_inscris, true).'; ?>', LOCK_EX);
+
+/////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+function type($value){
+  if(strcmp($value, 'mail')===0) return "email";
+  else if(strcmp($value, 'tel')===0) return "tel";
+  else return "text";
+}
+function titre($value){
+  if(strcmp($value, 'prenom')===0) return "Prénom";
+  else if(strcmp($value, 'nom')===0) return "nom";
+  else if(strcmp($value, 'mail')===0) return "email";
+  else if(strcmp($value, 'cdp')===0) return "Code postal";
+  else if(strcmp($value, 'date')===0) return "Date de naissance";
+  else if(strcmp($value, 'tel')===0) return "Téléphone ";
+  else return $value;
+}
+//////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,11 +37,15 @@ file_put_contents($filename, '<?php $table_inscris = '.var_export($table_inscris
     <title>cocktail</title>
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="style.css"/>
-  <head>
+  </head>
 
   <body>
     <?php include 'header.php'; ?>
     <main class="main_Modif">
+      <div class="info_modif">
+        <h3>Modification des données personnelles</h3>
+        <p>Vous souhaitez modifier l'une de vos informations? cliquez ou sélectionnez l'information correspondante ensuite renseigné et valider.</p>
+      </div>
       <details open class="details_modif">
         <summary>Votre profil
             <?php
@@ -50,44 +63,29 @@ file_put_contents($filename, '<?php $table_inscris = '.var_export($table_inscris
                }
             ?>
         </summary>
+          <form name ="form_modif" action="" method="post" class="datas_profil">
             <?php
-              foreach ($_SESSION['login'][$login] as $key => $value) {
-
-                if($key!=='mdp')
+              foreach ($_SESSION['login'][$login] as $key => $value ) {
+                if(strcmp($key,'mdp')!==0 && strcmp($key,'sexe')!==0)
                 {
                   ?>
-                  <div class="datas_profil">
-                    <p class="datas_name">
-                      <?php
-                        if(strcmp($key, 'prenom')===0) echo "Prénom";
-                        else if(strcmp($key, 'mail')===0) echo "email";
-                        else if(strcmp($key, 'cdp')===0) echo "Code postal";
-                        else if(strcmp($key, 'date')===0) echo "Date de naissance";
-                        else if(strcmp($key, 'tel')===0) echo "Téléphone ";
-                        else echo $key;
-                       ?>
-                    </p>
-                    <p class="datas_values">
-                      <?php
-                        ?>
-                        <form action="" method="post">
-                          <div>
-                            <label for=""></label>
-                            <span></span>
-                            <input type="" name="">
-                          </div>
-                        </form>
-                        <?php
-                      ?>
-
-                    </p>
-                  </div>
+                    <div id="champs">
+                      <label for="<?php echo $key?>">
+                        <span class="title_datas"><?php echo titre($key);?></span>
+                        <?php echo $value;?>
+                      </label>
+                      <input type="<?php echo type($key);?>" name="<?php echo $key?>" id="<?php echo $key?>"/>
+                    </div>
                   <?php
                 }
               }
             ?>
+            <div id="valider">
+              <input type="submit" name="envoie" id="modif_envoie" value="Valider"/>
+            </div>
+          </form>
       </details>
-    <main>
+    </main>
       <script src="jquery-3.3.1.min.js"></script>
       <script src="modif_js.js"></script>
   </body>
