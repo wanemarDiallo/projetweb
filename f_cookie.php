@@ -3,14 +3,14 @@
   if(isset($_POST['recette'])){
     $value_array = array(
                           'cocktail' => array(
-                                                htmlspecialchars($_POST['cocktail'])
+                                                htmlspecialchars($_POST['recette'])
                                             )
                         );
 
     if(!isset($_COOKIE['favorie_avant_connexion']))
     {
       $value_json = json_encode($value_array);
-      if(setcookie($nom, $value_json, time()+3600)/4) echo "ok";
+      if(setcookie($nom, $value_json, time()+3600/4)) echo "ok";
     }
     else
     {
@@ -30,7 +30,7 @@
       //array_push(tmlspecialchars($_POST['categorie']), $value_array['categorie']);
       //array_push(tmlspecialchars($_POST['recette']), $value_array['recette']);
       $value_json = json_encode($value_array);
-      if(setcookie($nom, $value_json, time()+3600)) echo "ajouté";
+      if(setcookie($nom, $value_json, time()+3600/4)) echo "ajouté";
     }
   }
 ?>
