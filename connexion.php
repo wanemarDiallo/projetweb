@@ -22,36 +22,28 @@ session_start();
                   {
                     $tab_fav = array(
                                       $login => array(
-                                        'categories'=> array(),
-                                        'recettes' => array()
+                                        'cocktail' => array()
                                       )
                                     );
                   }
 
-                  $tab_cat = $contenu -> {'categorie'};
-                  $tab_rec = $contenu -> {'recette'};
+                  $tab_rec = $contenu -> {'cocktail'};
                   if(array_key_exists(key($_SESSION['login']), $tab_fav))
                   {
                     foreach ($tab_rec as $key => $value) {
                           if(!in_array($tab_fav[$login], $value))
-                          array_push($tab_fav[$login]['recettes'], $value);
-                    }
-                    foreach ($tab_cat as $key => $value) {
-                          if(!in_array($tab_fav[$login], $value))
-                          array_push($tab_fav[$login]['categories'], $value);
+                          array_push($tab_fav[$login]['cocktail'], $value);
                     }
                   }
                   else
                   {
                     $l =array(
                       $login => array(
-                      'categories'=> array(),
-                      'recettes' => array()
+                      'cocktail' => array()
                     ));
                     $tab_fav += $l;
                     for ($i=0; $i < count($tab_cat); $i++) {
-                          array_push($tab_fav[$login]['recettes'], $tab_rec[$i]);
-                          array_push($tab_fav[$login]['categories'], $tab_cat[$i]);
+                          array_push($tab_fav[$login]['cocktail'], $tab_rec[$i]);
                         }
                   }
 
@@ -65,8 +57,7 @@ session_start();
                   {
                     $tab_fav = array(
                                       $login => array(
-                                        'categories'=> array(),
-                                        'recettes' => array()
+                                        'cocktail' => array()
                                       )
                                     );
 

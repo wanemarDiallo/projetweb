@@ -21,13 +21,12 @@ $(document).ready(function() {
     var url = window.location.href;
     var resultat = url.split('&');
     var nom_recette = resultat[1].split('=');
-    var nom_categorie = resultat[0].split('=');
 
      nom_recette = nom_recette[1].replace(/%20/g, ' ');
     $.ajax({
         type: "POST",
         url: 'f_cookie.php',
-        data: {'categorie': nom_categorie[1], 'recette':nom_recette },
+        data: {'recette':nom_recette },
         dataType: "text",
 
         success: function(data){

@@ -1,39 +1,22 @@
 <?php $tab_fav = array (
-  'wanemar' => 
-  array (
-    'categories' => 
-    array (
-      0 => 'Fruit',
-      1 => 'Aliment',
-      2 => 'Fruit',
-      3 => 'Kiwi',
-      4 => 'Baie',
-      5 => 'Aliment',
-    ),
-    'recettes' => 
-    array (
-      0 => 'Margarita',
-      1 => 'Bora bora',
-      2 => 'Margarita',
-      3 => 'Raifortissimo',
-      4 => 'Le vandetta',
-      5 => 'Screwdriver',
-    ),
-    'categorie' => NULL,
-  ),
   'aniki07' => 
   array (
-    'categories' => 
+    'cocktail' => 
     array (
-      0 => 'Kiwi',
-      1 => 'Baie',
-      2 => 'Aliment',
-    ),
-    'recettes' => 
-    array (
-      0 => 'Raifortissimo',
-      1 => 'Le vandetta',
-      2 => 'Screwdriver',
+      0 => '',
+      1 => '',
+      2 => '',
+      3 => '',
+      4 => '',
+      5 => '',
+      6 => '',
+      7 => '',
+      8 => '',
+      9 => '',
+      10 => '',
+      11 => '',
+      12 => '',
+      13 => '',
     ),
   ),
 ); ?>

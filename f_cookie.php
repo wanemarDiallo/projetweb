@@ -1,19 +1,16 @@
 <?php
   $nom = 'favorie_avant_connexion';
-  if(isset($_POST['recette']) && isset($_POST['categorie'])){
+  if(isset($_POST['recette'])){
     $value_array = array(
-                          'categorie' => array(
-                                                htmlspecialchars($_POST['categorie'])
-                                              ),
-                          'recette' => array(
-                                                htmlspecialchars($_POST['recette'])
+                          'cocktail' => array(
+                                                htmlspecialchars($_POST['cocktail'])
                                             )
                         );
 
     if(!isset($_COOKIE['favorie_avant_connexion']))
     {
       $value_json = json_encode($value_array);
-      if(setcookie($nom, $value_json, time()+3600)) echo "ok";
+      if(setcookie($nom, $value_json, time()+3600)/4) echo "ok";
     }
     else
     {
@@ -21,15 +18,10 @@
       //$value_array = array('categorie' => array(), 'recette' => array());
 
       $valeur_decode = json_decode($_COOKIE['favorie_avant_connexion']);
-      $tab_cat = $valeur_decode -> {'categorie'};
-      $tab_rec = $valeur_decode -> {'recette'};
-      foreach ($tab_cat as $key => $value) {
-        //if(!in_array(htmlspecialchars($value), $value_array['categorie']))
-        array_push($value_array['categorie'], htmlspecialchars($value));
-      }
+      $tab_rec = $valeur_decode -> {'cocktail'};
       foreach ($tab_rec as $key => $value) {
         //if(!in_array(htmlspecialchars($value), $value_array['recette']))
-        array_push($value_array['recette'], htmlspecialchars($value));
+        array_push($value_array['cocktail'], htmlspecialchars($value));
       }
 
       /**

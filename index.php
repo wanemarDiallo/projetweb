@@ -4,16 +4,10 @@ include 'f_cookie.php';
 if(isset($_COOKIE['favorie_avant_connexion'])){
 	$valeur_decode = json_decode($_COOKIE['favorie_avant_connexion']);
 	//var_dump($valeur_decode).'\n';
-	 $tab = $valeur_decode -> {'categorie'};
-	 $tab_r = $valeur_decode -> {'recette'};
-	 foreach ($tab as $key => $value) {
-	 		echo $value;
-	 }
+	 $tab_r = $valeur_decode -> {'cocktail'};
 	 foreach ($tab_r as $key => $value) {
 	 		echo $value;
 	 }
-	 //echo $valeur_decode -> {'recette'}[0].'<br>';
-
 }
 else
 {
