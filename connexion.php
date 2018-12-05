@@ -12,14 +12,15 @@ session_start();
           {
             $_SESSION['login'] = array($clef => $value);
             $filename = "favorie.php";
+            $nom = 'favorie';
             if (!file_exists($filename)){
               $file = fopen($filename, "w+");
               if($file) fclose($filename);
             }
             include $filename;
-            if(isset($_COOKIE['favorie_avant_connexion']))
+            if(isset($_COOKIE[$nom]))
             {//si le cookie exite
-              $contenu = json_decode($_COOKIE['favorie_avant_connexion']);
+              $contenu = json_decode($_COOKIE[$nom]);
               if(!isset($tab_fav))
               {///si tableau favorie  existe pas dans le fichier  on le crée
                 $tab_fav = array();
@@ -31,13 +32,18 @@ session_start();
                 $l = array($login => array('cocktail' => array()));
                 $tab_fav += $l;
               }
+              $i=0;
               foreach ($tab_cocktail as $key => $value) {
-                if(!in_array($tab_fav[$login]['cocktail'], $value))
-                    array_push($tab_fav[$login]['cocktail'], $value);
+                if(!in_array($value, $tab_fav[$login]['cocktail']))
+                    {
+                      array_push($tab_fav[$login]['cocktail'], $value);
+                    }
               }
               file_put_contents($filename, '<?php $tab_fav = '.var_export($tab_fav, true).'; ?>', LOCK_EX);
+              setcookie($nom,"");
+              unset($_COOKIE[$nom]);
             }
-              header('Location:index.php');
+            header('Location:index.php');
           }
         }
       }
