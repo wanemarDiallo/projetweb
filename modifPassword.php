@@ -1,7 +1,6 @@
-
 <?php session_start();
 
-include 'lesInscris.php';
+
 $filename = 'lesInscris.php';
 if(isset($_POST['envoie'])){
 
@@ -9,36 +8,20 @@ if(isset($_POST['envoie'])){
 	$login = $_POST['login'];
 	$mdp_conf = $_POST['mdp_conf'];
 
-
+	include 'lesInscris.php';
 	if(control_login($login,$table_inscris)) {
 		if(control_mdp($mdp) && strcmp($mdp,$mdp_conf)===0)
 		{
-
-			//$n_mdp = password_hash($mdp, PASSWORD_DEFAULT);
-			foreach($table_inscris as $key => $value)
-			{
-				if($key === $login)
-				{
-						if(password_hash($mdp, PASSWORD_DEFAULT))
-						{
-								echo $value['nom'];
-						  //$value['mdp'] = '';// = $mdp;
-							$value['nom'] = password_hash($mdp, PASSWORD_DEFAULT);
-							echo $value['nom'];
-							if(!file_put_contents($filename, '<?php $table_inscris = '.var_export($table_inscris, true).'; ?>', LOCK_EX)) echo "non ecris";
-							print_r($table_inscris)."\n";
-							//header('Location:inscription.php');
-						}else echo "echec hash";
-				}
-
-			}
+			$table_inscris[$login]['mdp'] = password_hash($mdp, PASSWORD_DEFAULT);
+			file_put_contents($filename, '<?php $table_inscris = '.var_export($table_inscris, true).'; ?>', LOCK_EX);
 		}
 		else
 		{
 			echo "mdp non correct";
 		}
 	}
-	else{
+	else
+	{
 		echo 'vous êtes pas inscris';
 	}
 }
@@ -50,23 +33,27 @@ if(isset($_POST['envoie'])){
 
 	function control_login($data_login, &$table_inscris){
     if(!array_key_exists($data_login, $table_inscris)) return FALSE;
-    else return TRUE;
+    else return true;
   }
-
-
 
 ?>
 <!DOCTYPE html>
 <html>
 <head>
   <title></title>
-  <link rel="stylesheet" href="style.css"/>
+  <style>
+	body{
+		margin: 0;
+		padding: 0;
+	}
+	main{
+		height:100%;
+		border: 1px solid red;
+	}
+	</style>
 </head>
 <body>
-<?php
-include 'header.php';
-?>
-  <main>
+  <main id="mod_mdp">
     <form action="" method="post">
       <div>
         <label for="">Nom d'utilisateur</label>

@@ -251,7 +251,7 @@ session_start();
         </form>
 
         <p class="mdp_oubier">
-          <a href="modifPassword.php">Mot de passe oublier ?</a>
+          <a href="#">Mot de passe oublier ?</a>
         </p>
 
         <p class="siError err_log err_mdp"></p>

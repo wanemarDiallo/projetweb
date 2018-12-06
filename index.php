@@ -32,12 +32,7 @@ else
 		  <form action="#" method="post" id="form_recherche">
 		    <input type="search" name="recherche" id="recherche" placeholder="faites un recherche"/>
 		    <button type="button" id="button_recherche">
-						<svg version="1.1" id="Capa_1"  x="0px" y="0px"
-							 viewBox="0 0 489.9 489.9">
-							<path d="M411.55,166.6c0-92-74.6-166.6-166.6-166.6S78.35,74.6,78.35,166.6c0,81.5,58.6,149.3,135.9,163.7l-6.8,121.5
-								c-1.2,20.7,15.3,38.1,36,38.1h3l0,0c20.7,0,37.2-17.4,36-38.1l-6.8-121.5C353.05,315.9,411.55,248.1,411.55,166.6z M244.95,276
-								c-60.4,0-109.4-49-109.4-109.4s49-109.4,109.4-109.4s109.4,49,109.4,109.4C354.35,227.1,305.35,276,244.95,276z"/>
-						</svg>
+						<img src="photos/search.svg" alt=""/>
 				</button>
 		  </form>
 		  <?php
@@ -87,7 +82,7 @@ else
 			      foreach ($Hierarchie as $clef => $valeur) {
 			        if(array_key_exists('super-categorie', $valeur) && $valeur['super-categorie'][0]==$_GET['valeur']){
 			          ?>
-			            <li>
+			            <li class="lien_sous_nav">
 			              <a href="?valeur=<?php echo $clef ?>"><?php echo $clef ?></a>
 			            </li>
 			          <?php

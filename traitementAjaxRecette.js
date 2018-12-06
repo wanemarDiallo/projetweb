@@ -22,7 +22,7 @@ $(document).ready(function() {
     var resultat = url.split('&');
     var nom_recette = resultat[1].split('=');
 
-     nom_recette = nom_recette[1].replace(/%20/g, ' ');
+     nom_recette = nom_recette[1].replace(/%[0-9]*/g, ' ');
     $.ajax({
         type: "POST",
         url: 'f_cookie.php',
@@ -33,8 +33,7 @@ $(document).ready(function() {
           alert(data);
         }
       });
-     //'index.php', {'categorie': nom_categorie[1], 'recette':nom_recette }, function(data){
-       //alert(data);
-     //});
   });
+
+ //if($('.lien_sous_nav').next()===0) alert (0);
 });

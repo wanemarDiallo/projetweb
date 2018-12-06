@@ -46,6 +46,9 @@ $(document).ready(function (){
     if($(this).val()=='') label.fadeIn();
   });
 
-
+  $('.mdp_oubier>a').on('click', function(){
+      var url = "modifPassword.php";
+      window.open(url,"modifier mdp","menubar=no, status=no, scrollbars=no, menubar=no, width=500, height=500")
+  });
 
 });

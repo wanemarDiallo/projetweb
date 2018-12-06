@@ -104,20 +104,32 @@ coeur icon
 ----- */
 
 .svg-icon-favorie {
-  width: 1em;
-  height: 1em;
+  width: 3em;
+  height: 3em;
   flex-direction:row-reverse;
   align-self: flex-end;
+  background-color: #CC8E69;
+  border-radius: 50%;
+  padding: 10px;
+}
+.buton_favorie:hover .svg-icon-favorie{
+    background-color: #424558;
+    box-shadow: 0px 0px 2px 2px #CC8E69;
+}
+.buton_favorie:hover .svg-icon-favorie path,
+.svg-icon-favorie  polygon,
+.svg-icon-favorie  rect{
+  fill:white;
 }
 
 .svg-icon-favorie path,
 .svg-icon-favorie  polygon,
 .svg-icon-favorie  rect {
-  fill: red;
+  fill:#424558;
 }
 
 .svg-icon-favorie  circle {
-  stroke: red;
+  stroke: #424558;
   stroke-width: 1;
 }
 /************************************************************
@@ -270,6 +282,19 @@ coeur icon
   margin: 0;
   width: 100%;
 }
+.imageRecette{
+  width: 100%;
+}
+figure{
+  text-align: center;
+  width: 50%;
+  margin: auto;
+}
+.imageRecette p{
+  width: 50%;
+  margin:5px auto;
+  font-size: 0.8em;
+}
 .titre{
   width: 60%;
   margin: auto;
@@ -280,17 +305,17 @@ coeur icon
   text-transform: uppercase;
 }
 .hr{
-  width: 60%;
+  width: 50%;
   margin: auto;
   display: inline-block;
   margin-top: 5px;
   margin-bottom: 5px;
 }
 .buton_favorie{
-
-}
-figure{
-  text-align: center;
+  border: none;
+  width: auto;
+  cursor: pointer;
+  border-radius:45%;
 }
 nav{
   margin: 0;
@@ -574,3 +599,4 @@ input[type="radio"]:checked + label span {
 .info_modif>p{
   font-size: 0.8em;
 }
+/*************************************************************/
