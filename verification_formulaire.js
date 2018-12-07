@@ -46,9 +46,35 @@ $(document).ready(function (){
     if($(this).val()=='') label.fadeIn();
   });
 
-  $('.mdp_oubier>a').on('click', function(){
-      var url = "modifPassword.php";
-      window.open(url,"modifier mdp","menubar=no, status=no, scrollbars=no, menubar=no, width=500, height=500")
+  $('.supp_envoi').on('click', function(event){
+
+    var nom = $('.hidden').attr('value');
+    var log = $('.log').text();
+
+    $.ajax({
+      url: "t_panier.php",
+      type: 'POST',
+      data: {'nom': nom, 'login': log},
+      dataType: 'text',
+
+      success:function(data){
+        var hauteurWin = document.body.clientHeight;
+        $('#main_panier form').css("display", "none");
+        $('#main_panier').html('<p><img src="photos/ajax-loader.gif"/></p>');
+        $('#main_panier').css({
+          'display':'flex',
+          'justify-content': 'center',
+          'flex-direction':'column',
+          'height': hauteurWin,
+        });
+        $('#main_panier p').css({
+          'align-self': 'center',
+          'width':'30%',
+          'text-align': 'center'
+        });
+        window.location.reload(500);
+      }
+    });
   });
 
 });

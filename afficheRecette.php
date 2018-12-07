@@ -1,12 +1,16 @@
-<?php
-  session_start();
-  include "Donnees.inc.php";
-  //$_GET['titreRecettes'];
-  foreach ($Recettes as $clef => $value) {
-    if(strcmp($value['titre'], $_GET['titreRecettes'])===0)
-    {
-      echo $value['ingredients'].'<br>';
-      echo $value['preparation'].'<br>';
-    }
-  }
- ?>
+<div id="sous_nav">
+  <ul>
+      <?php
+      if(!isset($tabRecettes)) $tabRecettes = array(); //table quiu contiendra les recettes sans doublons
+      foreach ($Hierarchie as $clef => $valeur) {
+        if(array_key_exists('super-categorie', $valeur) && $valeur['super-categorie'][0]==$_GET['valeur']){
+          ?>
+            <li class="lien_sous_nav">
+              <a href="?valeur=<?php echo $clef ?>"><?php echo $clef ?></a>
+            </li>
+          <?php
+        }
+      }
+    ?>
+ </ul>
+</div>
