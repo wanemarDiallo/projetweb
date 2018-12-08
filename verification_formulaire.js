@@ -44,11 +44,10 @@ $(document).ready(function() {
         if ($(this).val() == '') label.fadeIn();
     });
 
-    $('.supp_envoi').on('click', function(event) {
+    $('.envoi').on('click', function() {
 
-        var nom = $('.hidden').attr('value');
+        var nom = $(this).prev().attr('value');
         var log = $('.log').text();
-
         $.ajax({
             url: "t_panier.php",
             type: 'POST',

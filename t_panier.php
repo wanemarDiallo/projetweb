@@ -7,18 +7,11 @@
     $login = $_POST['login']; // je recupère le login
     include 'favorie.php';//j'inclue le fichier favorie.php
 
-    /**
-     * @param algoSuppression
-     *  
-     * */
-    $position = array_search($nom, $tab_fav[$login]['cocktail']);//je reccupère la position de l'éléments à supprimer
-    //appel function ($nom, $tab_fav)
-    unset($tab_fav[$login]['cocktail'][$position]);
+    
+    $pos = array_search($nom, $tab_fav[$login]['cocktail']);
+            
+    unset($tab_fav[$login]['cocktail'][$pos]);
     file_put_contents($filename, '<?php $tab_fav = '.var_export($tab_fav, true).'; ?>', LOCK_EX);
     header('Location:panier.php');
   }
-  /*function supp($nom, &$tab_fav)
-  {
-    //
-  }
-?>*/
+?>

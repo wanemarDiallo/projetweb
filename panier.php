@@ -102,6 +102,18 @@ $login = key($_SESSION['login']);//je reccupère le login
         justify-content:space-between;
         width:70%;
       }
+      .vide{
+        width:50%;
+        height:250px;
+        margin:10px auto;
+        display:flex;
+        justify-content: center;
+      }
+      .vide>p{
+        font-size:1em;
+        text-align: center;
+        align-self: center;
+      }
       footer{
         background-color:#424558;
         color:white;
@@ -136,20 +148,31 @@ $login = key($_SESSION['login']);//je reccupère le login
         ?>
         <p class="log" style="display:none"><?php echo $login;?></p>
         <?php
-        foreach ($tab_fav[$login]['cocktail'] as $key => $value) {
-          ?>
-            <form action="t_panier.php" method="post"/>
-              <h2 class="nom_rec"><span><?php echo $value; ?></span></h2>
-              <div>
+        if(!empty($tab_fav[$login]['cocktail']))
+        {
+          foreach ($tab_fav[$login]['cocktail'] as $key => $value) {
+            ?>
+              <form action="t_panier.php" method="post"/>
+                <h2 class="nom_rec"><span><?php echo $value; ?></span></h2>
                 <div>
-                  <?php affiche_in_pre($value, $Recettes, 3, 3); ?>
+                  <div>
+                    <?php affiche_in_pre($value, $Recettes, 3, 3); ?>
+                  </div>
+                  <p class="button_supp">
+                    <input type="text" value="<?php echo $value; ?>" style="display:none"/>
+                    <input type="button" class ="envoi" value="supprimer"/>
+                  </p>
                 </div>
-                <p class="button_supp">
-                  <input type="text" value="<?php echo $value; ?>" class="hidden" style="display:none"/>
-                  <input type="button" value="supprimer" class="supp_envoi"/>
-                </p>
-              </div>
-            </form>
+              </form>
+            <?php
+          }
+        }
+        if(empty($tab_fav[$login]['cocktail']))
+        {
+          ?>
+            <div class="vide">
+              <p>Panier vide :-)</p>
+            </div>
           <?php
         }
        ?>

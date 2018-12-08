@@ -11,7 +11,7 @@ session_start();
       $value_json = json_encode($value_array);
       if(setcookie($nom, $value_json, time()+3600/10)) echo "ok";
     }
-    elseif(isset($_COOKIE[$nom]) && !isset($_SESSION['login']))
+    if(isset($_COOKIE[$nom]) && !isset($_SESSION['login']))
     {
       $valeur_decode = json_decode($_COOKIE['favorie']);
       $tab_rec = $valeur_decode -> {'cocktail'};
@@ -26,7 +26,7 @@ session_start();
       $value_json = json_encode($value_array);
       if(setcookie($nom, $value_json, time()+3600/10)) echo "ajouté";
     }
-    else
+    if(!isset($_COOKIE[$nom]) && isset($_SESSION['login']))
     {
       $filename = "favorie.php";
       include 'favorie.php';
