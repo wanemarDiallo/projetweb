@@ -131,7 +131,23 @@ session_start();
 		<title>projet</title>
 		<meta charset="uft-8"/>
     <link rel="stylesheet" href="style.css"/>
-	</head>
+    <link rel="icon" type="image/x-icon" href="photos/icon.png" />
+    <style>
+      footer{
+        background-color:#424558;
+        color:white;
+        padding:10px;
+        margin-top:10px;
+      }
+      footer p{
+        width:50%;
+        margin:0 auto;
+        padding:5px;
+        text-align:center;
+        font-size:0.8em;
+      }
+    </style>
+  </head>
 	<body>
     <!--le header -->
     <?php include 'header.php'; ?>
@@ -259,6 +275,7 @@ session_start();
 		</main>
 
     <!--Le <footer>-->
+    <?php include "footer.php";?>
     <script src="jquery-3.3.1.min.js"></script>
     <script src="verification_formulaire.js"></script>
 	</body>

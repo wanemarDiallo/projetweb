@@ -37,6 +37,32 @@ function titre($value){
     <title>cocktail</title>
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="style.css"/>
+    <link rel="icon" type="image/x-icon" href="photos/icon.png" />
+    <style>
+			footer {
+				background-color: #424558;
+				color: white;
+        padding: 30px;
+        margin-top:10px;
+			}
+
+			footer p {
+				width: 50%;
+				margin: 0 auto;
+				padding: 5px;
+				text-align: center;
+        font-size: 0.8em;
+       
+      }
+      .print_error{
+        border:1px solid red;
+        width:30%;
+        padding:10px;
+        margin: 10px auto;;
+        tex-align: center;
+        color:red;
+      }
+			</style>
   </head>
 
   <body>
@@ -85,7 +111,9 @@ function titre($value){
             </div>
           </form>
       </details>
+      <p class="print_error"></p>
     </main>
+      <?php include "footer.php";?>
       <script src="jquery-3.3.1.min.js"></script>
       <script src="modif_js.js"></script>
   </body>

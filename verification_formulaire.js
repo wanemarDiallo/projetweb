@@ -1,80 +1,80 @@
-$(document).ready(function (){
-  /**
-    @Interaction et mise en forme des input connexion
-  */
-  $('.siError').hide(); //on casse les blocks d'affiche d'erreur
-
-  /**
-    @Traitement du formulaire de connexion
-    @Algorithme:
-
+$(document).ready(function() {
+    /**
+      @Interaction et mise en forme des input connexion
     */
-  $('#connecter').click(function(event){
-    event.preventDefault();
-    var log = $('#login').val();
-    var mdp = $('#mdp').val();
+    $('.siError').hide(); //on casse les blocks d'affiche d'erreur
 
-    var regex_log = new RegExp("^[a-zA-Z]+[0-9]*$");
+    /**
+      @Traitement du formulaire de connexion
+      @Algorithme:
 
-    if (!regex_log.test(log)){
-          $('.err_log').empty().hide().append("l'information du champ login n'est pas valide").fadeIn();
-          $('#login').css('border-color', 'red');
-      }
-    else if(mdp.length<8){
-      $('.err_mdp').empty().hide().append("Le mot de passe doit contenir au moins 8 caractères.").fadeIn();
-      $('#mdp').css('border-color', 'red');
-    }
-    else{
-      $('.err_log, .err_mdp').empty().hide();
-      $(this).css('border-color', '#CC8E69');
-      $.post('connexion.php', {'login': log, 'mdp': mdp}, function(data){
-          if(data==0){
-          $('.err_mdp').empty().hide().append("Vous êtes pas inscris.").fadeIn();
-          }else {
-            $('#connexion').submit();
-          }
-      });
-    }
-  });
+      */
+    $('#connecter').click(function(event) {
+        event.preventDefault();
+        var log = $('#login').val();
+        var mdp = $('#mdp').val();
 
-  $('.connexion>input, .inscription>input').on('focus', function(){
-    var label = $(this).prev();
-    label.fadeOut();
-  });
-  $('.connexion>input, .inscription>input').on('blur', function(){
-    var label = $(this).prev();
-    if($(this).val()=='') label.fadeIn();
-  });
+        var regex_log = new RegExp("^[a-zA-Z]+[0-9]*$");
 
-  $('.supp_envoi').on('click', function(event){
+        if (!regex_log.test(log)) {
+            $('.err_log').empty().hide().append("l'information du champ login n'est pas valide").fadeIn();
+            $('#login').css('border-color', 'red');
+        } else if (mdp.length < 8) {
+            $('.err_mdp').empty().hide().append("Le mot de passe doit contenir au moins 8 caractères.").fadeIn();
+            $('#mdp').css('border-color', 'red');
+        } else {
+            $('.err_log, .err_mdp').empty().hide();
+            $(this).css('border-color', '#CC8E69');
+            $.post('connexion.php', { 'login': log, 'mdp': mdp }, function(data) {
+                if (data == 0) {
+                    $('.err_mdp').empty().hide().append("Vous êtes pas inscris.").fadeIn();
+                } else {
+                    $('#connexion').submit();
+                }
+            });
+        }
+    });
 
-    var nom = $('.hidden').attr('value');
-    var log = $('.log').text();
+    $('.connexion>input, .inscription>input').on('focus', function() {
+        var label = $(this).prev();
+        label.fadeOut();
+    });
+    $('.connexion>input, .inscription>input').on('blur', function() {
+        var label = $(this).prev();
+        if ($(this).val() == '') label.fadeIn();
+    });
 
-    $.ajax({
-      url: "t_panier.php",
-      type: 'POST',
-      data: {'nom': nom, 'login': log},
-      dataType: 'text',
+    $('.supp_envoi').on('click', function(event) {
 
-      success:function(data){
-        var hauteurWin = document.body.clientHeight;
+        var nom = $('.hidden').attr('value');
+        var log = $('.log').text();
+
+        $.ajax({
+            url: "t_panier.php",
+            type: 'POST',
+            data: { 'nom': nom, 'login': log },
+            dataType: 'text',
+
+            success: function(data) {
+                window.setInterval(wait(), 3000);
+            }
+        });
+    });
+
+    function wait() {
         $('#main_panier form').css("display", "none");
         $('#main_panier').html('<p><img src="photos/ajax-loader.gif"/></p>');
         $('#main_panier').css({
-          'display':'flex',
-          'justify-content': 'center',
-          'flex-direction':'column',
-          'height': hauteurWin,
+            'width': '50%',
+            'margin': '20% auto'
         });
         $('#main_panier p').css({
-          'align-self': 'center',
-          'width':'30%',
-          'text-align': 'center'
+            'text-align': 'center'
         });
-        window.location.reload(500);
-      }
-    });
-  });
-
+        window.location.reload('panier.php');
+    }
+    /**
+     * @param leFooter
+     * 
+     */
 });

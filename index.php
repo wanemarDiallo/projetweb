@@ -1,19 +1,5 @@
 <?php
 session_start();
-///////////////////////////////////////////
-//////////// test /////////////////////
-if(isset($_COOKIE['favorie'])){
-	$valeur_decode = json_decode($_COOKIE['favorie']);
-	//var_dump($valeur_decode).'\n';
-	 $tab_r = $valeur_decode -> {'cocktail'};
-	 foreach ($tab_r as $key => $value) {
-	 		echo $value;
-	 }
-}
-else
-{
-	echo "not cookie";
-}
 //////////////////////////////////////////////
  include 'functions.php';
 ?>
@@ -23,8 +9,25 @@ else
 		<title>projet</title>
 		<meta charset="uft-8"/>
 		<link rel="stylesheet" href="style.css"/>
-		 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-	</head>
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"/>
+		<link rel="icon" type="image/x-icon" href="photos/icon.png" />
+		<style>
+			footer {
+				background-color: #424558;
+				color: white;
+				padding: 10px;
+			}
+
+			footer p {
+				width: 30%;
+				margin: 0 auto;
+				padding: 5px;
+				text-align: center;
+				font-size: 0.8em;
+				margin-left:40%
+			}
+			</style>
+		</head>
 	<body>
 		<?php include 'header.php'; ?>
 		<?php include 'nav.php'; ?>
@@ -64,7 +67,7 @@ else
 
 			</div>
 		</main>
-		<footer></footer>
+		<?php include "footer.php"; ?>
 		<script src="jquery-3.3.1.min.js"></script>
     <script src="traitementAjaxRecette.js"></script>
 	</body>
