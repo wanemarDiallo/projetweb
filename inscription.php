@@ -91,6 +91,9 @@ session_start();
       .siError{
         width: 40%;
       }
+      .span_connexion{
+        width:20%;
+      }
     </style>
   </head>
 	<body>

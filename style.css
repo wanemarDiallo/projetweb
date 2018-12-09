@@ -106,6 +106,7 @@ header .c:hover,
     padding: 10px;
     border: 1px solid #CC8E69;
     width: 94%;
+    height: auto;
 }
 
 
@@ -327,6 +328,7 @@ coeur icon
     padding: 0;
     margin: 0;
     width: 100%;
+    padding: 3px;
 }
 
 .imageRecette {
@@ -472,7 +474,7 @@ nav {
 }
 
 .connexion {
-    width: 53%;
+    width: 60%;
     margin: 5px;
     position: relative;
     display: flex;
@@ -522,7 +524,7 @@ nav {
 
 .submit_connexion {
     display: flex;
-    width: 53%;
+    width: 60%;
 }
 
 .submit_connexion>input[type="submit"],
@@ -589,7 +591,6 @@ input[type="radio"]:checked+label span {
 .label_ins:hover {
     cursor: text;
 }
-
 .span_connexion,
 .span_ins {
     display: block;
