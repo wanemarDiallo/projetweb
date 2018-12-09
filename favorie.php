@@ -3,9 +3,7 @@
   array (
     'cocktail' => 
     array (
-      9 => 'Shoot up',
-      12 => 'Bloody Mary',
-      14 => 'Builder',
+      0 => 'Bloody Mary',
     ),
   ),
   'wanemar' => 

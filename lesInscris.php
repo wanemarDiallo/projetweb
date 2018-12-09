@@ -2,14 +2,14 @@
   'aniki07' => 
   array (
     'mdp' => '$2y$10$T8Bn./vhyrf98kDZzjLhK.VSARhyJgGxZFFlbyBLiD/cf1R9IdRWC',
-    'nom' => 'Diallo',
+    'nom' => 'zitoun',
     'prenom' => 'Brahim',
     'sexe' => 'Homme',
-    'mail' => 'zitoun.brahim@sfr-bis.fr',
-    'date' => '11/10/1999',
-    'cdp' => '57020',
-    'ville' => 'florange',
-    'tel' => '0714758499',
+    'mail' => 'zitoun.brahim@hotmail.fr',
+    'date' => '15/02/1994',
+    'cdp' => '57190',
+    'ville' => 'Florange',
+    'tel' => '0619820108',
   ),
   'wanemar' => 
   array (

@@ -102,7 +102,7 @@ function control_ville($data_ville){//faut traiter les accents (éè)
   else return TRUE;
 }
 function control_tel($data_tel){
-  if(!preg_match('/^[0][1-9]{9}$/', trim($data_tel))) return FALSE;
+  if(!preg_match('/^[0][1-9][0-9]{8}$/', trim($data_tel))) return FALSE;
   else return TRUE;
 }
 //////////////////////////////////////////////////////////////////////
