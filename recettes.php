@@ -7,7 +7,7 @@ foreach ($tabRecettes as $value) {
   {	?>
       <div class="block_recettes">
         <p class="image">
-          <!--<img src="photos/<?php //echo $elem;?>.jpg" alt="l'image de cette recette est indisponible"/>-->
+          <img src="photos/<?php echo $elem;?>.jpg" alt="l'image de cette recette est indisponible"/>
         </p>
         <p class="a">
           <a href="?valeur=<?php echo $_GET['valeur']?>&titreRecettes=<?php echo $value?>" class="liens"><?php echo $value?></a>
@@ -21,8 +21,12 @@ foreach ($tabRecettes as $value) {
 foreach ($tabRecettes as $value) {
   $elem = preg_replace('/[\s]/' ,'_', $value);
   if(!is_file('photos/'.$elem.'.jpg'))
-  {	?>
+  {
+    ?>
       <div class="block_recettes">
+      <p class="image">
+          <img src="photos/cocktails.jpg" alt="l'image de cette recette est indisponible"/>
+        </p>
         <p class="a">
           <a href="?valeur=<?php echo $_GET['valeur']?>&titreRecettes=<?php echo $value?>" class="liens"><?php echo $value?></a>
         </p>

@@ -5,15 +5,50 @@ $filename = "lesInscris.php";
 include('lesInscris.php');
 
 $login = key($_SESSION['login']);//on reccupère le login du user
+$error = '';
 if(isset($_POST['envoie'])){
-  
-}
+  if(isset($_POST['nom']) && !empty($_POST['nom'])){
+    if(!control_nom($_POST['nom'])) $error = "Nom non valide.";
+    else $_SESSION ['login'][$login]['nom'] = $_POST['nom'];
+  }
+  if(isset($_POST['prenom']) && !empty($_POST['prenom'])){
+    if(!control_lastName($_POST['prenom'])) $error = 'Prénom non valide.';
+    else $_SESSION ['login'][$login]['prenom'] = $_POST['prenom'];
+  }
+  if(isset($_POST['mail']) && !empty($_POST['mail'])){
+    if(!control_mail($_POST['mail'])) $error = 'E-mail non valide.';
+    else $_SESSION ['login'][$login]['mail'] = $_POST['mail'];
+  }
+  if(isset($_POST['date']) && !empty($_POST['date'])){
+    if(!control_date($_POST['date'])) $error = "Date de naissance non valide, exemple=(jj/mm/aaaa)";
+    else $_SESSION['login'] [$login]['date'] = $_POST['date'];
+  }
+  if(isset($_POST['cdp']) && !empty($_POST['cdp'])){
+    if(!control_cdp($_POST['cdp'])) $error = "Le code postal n'est pas valide.";
+    else $_SESSION ['login'][$login]['cdp'] = $_POST['cdp'];
+  }
+  if(isset($_POST['ville']) && !empty($_POST['ville'])){
+    if(!control_ville($_POST['ville'])) $error = "Nom de la ville n'est pas valide.";
+    else $_SESSION ['login'][$login]['ville'] = $_POST['ville'];
+  }
+  if(isset($_POST['tel']) && !empty($_POST['tel'])){
+    if(!control_tel($_POST['tel'])) $error = "Numéro de téléphone non valide.";
+    else $_SESSION ['login'][$login]['tel'] = $_POST['tel'];
+  }
+  if(empty($_POST['nom']) && empty($_POST['prenom']) && empty($_POST['mail'])
+      && empty($_POST['date']) && empty($_POST['cdp']) && empty($_POST['ville']) 
+      && empty($_POST['tel']))
+  {
+    $error = "Pour modifier une information, veuillez renseigner le champ correspondant.";
+  }
+  $table_inscris = array_merge($table_inscris, $_SESSION['login']);
+  file_put_contents($filename, '<?php $table_inscris = '.var_export($table_inscris, true).'; ?>', LOCK_EX);
 
-$table_inscris = array_merge($table_inscris,$_SESSION['login'] );//ajout du nouveau utilisateur sur la table des inscris
-file_put_contents($filename, '<?php $table_inscris = '.var_export($table_inscris, true).'; ?>', LOCK_EX);
+}
 
 /////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
+
 function type($value){
   if(strcmp($value, 'mail')===0) return "email";
   else if(strcmp($value, 'tel')===0) return "tel";
@@ -27,6 +62,48 @@ function titre($value){
   else if(strcmp($value, 'date')===0) return "Date de naissance";
   else if(strcmp($value, 'tel')===0) return "Téléphone ";
   else return $value;
+}
+function control_nom($data_name){
+  if(!preg_match('/^[a-z-]+$/i', trim($data_name))) return FALSE;
+  else return TRUE;
+}
+function control_lastName($data_lName){
+  if(!preg_match('/^[a-z-]+$/i', trim($data_lastName))) return FALSE;
+  return true;
+}
+function control_mail($data_mail){
+  if(!preg_match('/^[a-z0-9.-]+@[a-z0-9.-]{2,}[.]{1}[a-z]{2,3}$/', strtolower(trim($data_mail)))) return FALSE;
+  else return TRUE;
+}
+function control_cdp($data_cdp){
+  if(!preg_match('/^[0-9]{5}$/', strtolower(trim($data_cdp)))) return FALSE;
+  else return TRUE;
+}
+function control_date($data_date){
+  if(!preg_match('/^[0-9]{2}[\/][0-9]{2}[\/][0-9]{4}$/', trim($data_date))) return FALSE;
+  else
+  {
+    list($jour, $mois, $annee) = explode('/', $data_date);
+    if($mois >= 1 && $mois <= 12){
+      if(($mois != 2 && $jour >= 1 && $jour <= 31) || ($mois == 2 && $jour >= 1 && $jour <= 29)){
+        if($annee >= 1 && $annee <= 32767){
+          if(checkdate($mois, $jour, $annee)) return TRUE;
+          else return FALSE;
+        }
+      else return FALSE;
+      }
+      else return FALSE;
+    }
+    else return FALSE;
+  }
+}
+function control_ville($data_ville){//faut traiter les accents (éè)
+  if(!preg_match('/^[a-z-\s]+$/', strtolower(trim($data_ville)))) return FALSE;
+  else return TRUE;
+}
+function control_tel($data_tel){
+  if(!preg_match('/^[0][1-9]{9}$/', trim($data_tel))) return FALSE;
+  else return TRUE;
 }
 //////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
@@ -55,12 +132,12 @@ function titre($value){
        
       }
       .print_error{
-        border:1px solid red;
         width:30%;
         padding:10px;
         margin: 10px auto;;
         tex-align: center;
         color:red;
+        font-size: 0.7em;
       }
 			</style>
   </head>
@@ -111,7 +188,7 @@ function titre($value){
             </div>
           </form>
       </details>
-      <p class="print_error"></p>
+      <p class="print_error"> <?php echo $error;?> </p>
     </main>
       <?php include "footer.php";?>
       <script src="jquery-3.3.1.min.js"></script>

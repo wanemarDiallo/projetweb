@@ -1,6 +1,7 @@
 <?php
 session_start();
- include('lesInscris.php');
+  include "miseAjourPhp.php";
+  include('lesInscris.php');
   /*test connexion */
   if(isset($_POST['login']) && isset($_POST['mdp'])){
       $login = $_POST['login'];

@@ -428,6 +428,11 @@ nav {
     transition: .70s background-color linear;
 }
 
+.image>img {
+    padding: 5px;
+    border-radius: 10%;
+}
+
 
 /*Mise en forme de la page inscription_connexion*/
 
@@ -467,7 +472,7 @@ nav {
 }
 
 .connexion {
-    width: 100%;
+    width: 53%;
     margin: 5px;
     position: relative;
     display: flex;
@@ -479,13 +484,11 @@ nav {
     position: relative;
     margin-bottom: 5px;
     display: flex;
-    align-items: flex-start;
 }
 
 .connexion>input {
     border: none;
     border: 0.1px solid #CC8E69;
-    ;
     padding: 10px;
 }
 
@@ -497,14 +500,13 @@ nav {
 }
 
 .sexe_ins {
-    width: 50%;
+    width: 100%;
     margin: 5px 0;
-    align-self: flex-start;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
 }
 
-.sexe_ins>p {
+.sexe_ins p {
     /*sexe*/
     margin: 0;
     padding: 0;
@@ -513,11 +515,14 @@ nav {
     padding: 5px;
 }
 
-.submit_ins,
+.submit_ins {
+    width: 90%;
+    margin: 5px auto;
+}
+
 .submit_connexion {
-    width: 44%;
-    margin: 10px 0;
-    margin-left: 14%;
+    display: flex;
+    width: 53%;
 }
 
 .submit_connexion>input[type="submit"],
@@ -538,9 +543,8 @@ nav {
 
 .mdp_oubier {
     text-align: center;
-    width: 44%;
-    margin: 0 auto;
-    margin-left: 35%;
+    width: 53%;
+    margin: 10px auto;
 }
 
 .mdp_oubier>a {
@@ -627,7 +631,6 @@ input[type="radio"]:checked+label span {
     font-size: 0.70em;
     opacity: .90;
     font-style: oblique;
-    color: red;
     transition: .50s color linear;
 }
 

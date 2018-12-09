@@ -6,7 +6,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>projet</title>
+		<title>Cocktail</title>
 		<meta charset="uft-8"/>
 		<link rel="stylesheet" href="style.css"/>
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"/>

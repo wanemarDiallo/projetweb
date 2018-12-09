@@ -1,12 +1,14 @@
 <?php
 session_start();
+  include "miseAjourPhp.php";///pour la mise à jour
   /*Destruction de la session du menu url (le lien absolu)*/
   if(isset($_SESSION['chemin']) && isset($_SESSION['login'])){
     $_SESSION['chemin'] = array();
     session_destroy();
   }
   /////////////////////////////////////////////////////
-
+  $errorMg = '';
+  $el = 0;
   /*Partie table des inscris enregistré sur un fichier php*/
   $filename = "lesInscris.php";
   include('lesInscris.php');
@@ -15,7 +17,7 @@ session_start();
 
   /*Enregistrement au cour de l'inscription*/
   if(isset($_POST['envoie'])){
-    if(!isset($_POST['sexe']) || !control_sexe($_POST['sexe'])) echo "veuillez renseignez le champ sexe";
+    if(!isset($_POST['sexe']) || !control_sexe($_POST['sexe'])) { $errorMg = "veuillez renseignez le champ sexe"; $el = 1;}
     else
     {
       //  echo $_POST['sexe'];
@@ -30,17 +32,15 @@ session_start();
         $ville = $_POST['ville'];
         $tel = $_POST['tel'];
 
-        $errorMg = "";
+        if(!control_login($login)) { $el = 2; $errorMg = "Login non valide, essayez un login alpha-Numérique (exemple: abc24)";}
+        else if(!control_mdp($mdp) || strcmp($mdp,$mdp_conf)!==0) { $el = 3; $errorMg = "Le mot de passe non valide ou non conforme, **il faut au moins 8 caractères";}
+        else if(!control_name($nom, $prenom)) { $el = 4; $errorMg = "les données(nom ou prénom) ne sont pas valident.";}
 
-        if(!control_login($login)) $errorMg = "Login non valide, alpha-Numérique son valide (exemple: abc24)";
-        else if(!control_mdp($mdp) || strcmp($mdp,$mdp_conf)!==0) $errorMg = "Mot de passe non valide il faut au moins 8 caractères";
-        else if(!control_name($nom, $prenom)) echo "le nom ou prenom saisie n'est pas valide";
-      //  else if(!control_sexe($sexe)) echo "veuillez renseignez le champ sexe";
-        else if(!control_mail($mail)) echo "mail non valide";
-        else if(!control_cdp($cdp)) echo "cdp non valide";
-        else if(!control_date($dateNaiss)) echo "date de naissance non valide, exemple : 10/10/1998";
-        else if(!control_ville($ville)) echo "le nom de la ville non valide";
-        else if(!control_tel($tel)) echo "numéro de Téléphone non valide";
+        else if(!control_mail($mail)) { $el = 5; $errorMg = "Votre e-mail n'est pas valide.";}
+        else if(!control_cdp($cdp)) { $el = 6; $errorMg = "le code postal doit être numerique et 5 chiffres";}
+        else if(!control_date($dateNaiss)) {$el=7; $errorMg ="Date de naissance non valide, exemple : 10/10/1998";}
+        else if(!control_ville($ville)) {$el = 8; $errorMg = "Le nom de la ville n'est pas valide";}
+        else if(!control_tel($tel)) {$el = 9; $errorMg = "Numéro de Téléphone non valide";}
         else
         {
             if(!array_key_exists($login, $table_inscris))//verification s'il n'existe pas un login pareil
@@ -63,72 +63,14 @@ session_start();
 
       }
     }
-
-  ////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////
-  function control_login($data_login){
-    if(!preg_match('/^[a-z]+[0-9]*$/i', trim($data_login)))
-      return FALSE;
-    else return TRUE;
-  }
-  function control_mdp($data_mdp){
-    $taille = trim(strlen($data_mdp));
-    if(($taille < 8)) return FALSE;
-    else return TRUE;
-  }
-  function control_name($data_name, $data_lastName){
-    if(!preg_match('/^[a-z-]+$/i', trim($data_name))) return FALSE;
-    else if(!preg_match('/^[a-z-]+$/i', trim($data_lastName))) return FALSE;
-    else return TRUE;
-  }
-  function control_sexe($data_sexe){
-    if(strcmp(strtolower($data_sexe), 'homme')!==0 && strcmp(strtolower($data_sexe), 'femme')!==0) return FALSE;
-    else return TRUE;
-  }
-  function control_mail($data_mail){
-    if(!preg_match('/^[a-z0-9.-]+@[a-z0-9.-]{2,}[.]{1}[a-z]{2,3}$/', strtolower(trim($data_mail)))) return FALSE;
-    else return TRUE;
-  }
-  function control_cdp($data_cdp){
-    if(!preg_match('/^[0-9]{5}$/', strtolower(trim($data_cdp)))) return FALSE;
-    else return TRUE;
-  }
-  function control_date($data_date){
-    if(!preg_match('/^[0-9]{2}[\/][0-9]{2}[\/][0-9]{4}$/', trim($data_date))) return FALSE;
-    else
-    {
-      list($jour, $mois, $annee) = explode('/', $data_date);
-      if($mois >= 1 && $mois <= 12){
-        if(($mois != 2 && $jour >= 1 && $jour <= 31) || ($mois == 2 && $jour >= 1 && $jour <= 29)){
-          if($annee >= 1 && $annee <= 32767){
-            if(checkdate($mois, $jour, $annee)) return TRUE;
-            else return FALSE;
-          }
-        else return FALSE;
-        }
-        else return FALSE;
-      }
-      else return FALSE;
-    }
-  }
-  function control_ville($data_ville){//faut traiter les accents (éè)
-    if(!preg_match('/^[a-z-\s]+$/', strtolower(trim($data_ville)))) return FALSE;
-    else return TRUE;
-  }
-  function control_tel($data_tel){
-    if(!preg_match('/^[0][1-9]{9}$/', trim($data_tel))) return FALSE;
-    else return TRUE;
-  }
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    include 'functions_verif.php';
 	?>
 
   <!--page d'inscription et connexion -->
 	<!DOCTYPE html>
 	<html>
 	<head>
-		<title>projet</title>
+		<title>Cocktail</title>
 		<meta charset="uft-8"/>
     <link rel="stylesheet" href="style.css"/>
     <link rel="icon" type="image/x-icon" href="photos/icon.png" />
@@ -145,6 +87,9 @@ session_start();
         padding:5px;
         text-align:center;
         font-size:0.8em;
+      }
+      .siError{
+        width: 40%;
       }
     </style>
   </head>
@@ -165,76 +110,77 @@ session_start();
               <input type="radio" name="sexe" id="sexe_f" value="Femme">
               <label for="sexe_f"><span></span>Mm</label>
             </p>
+            <p class="error_sex" style="width:60%; padding:5px; color: red;"><?php if(strcmp($errorMg,'')!==0 && $el===1) echo $errorMg;?></p>
           </div>
 
           <div class="login_ins inscription">
             <span class="span_ins span_login">Login</span>
             <label for="login_ins" class="label_ins">Login</label>
             <input type="text" name="login" id="login_ins">
-            <span class="siError"></span>
+            <span class="siError"><?php if(strcmp($errorMg,'')!==0 && $el===2) echo $errorMg;?></span>
           </div>
 
           <div class="mdp_ins inscription">
             <span class="span_ins span_mdp">Password</span>
             <label for="mdp_ins" class="label_ins">Password</label>
             <input type="password" name="mdp" id="mdp_ins">
-            <span class="siError"></span>
+            <span class="siError"><?php if(strcmp($errorMg,'')!==0 && $el ===3) echo $errorMg;?></span>
           </div>
 
           <div class="mdp_ins_conf inscription">
             <span class="span_ins span_mdp_conf">Password</span>
             <label for="mdp_ins_conf" class="label_ins">Confirmez votre password</label>
             <input type="password" name="mdp_conf" id="mdp_ins_conf">
-            <span class="siError"></span>
+            <span class="siError"><?php if(strcmp($errorMg,'')!==0 && $el ===3) echo $errorMg;?></span>
           </div>
 
           <div class="nom_ins inscription">
             <span class="span_ins span_nom">Nom</span>
             <label for="nom_ins" class="label_ins">Nom</label>
             <input type="text" name="nom" id="nom_ins">
-            <span class="siError"></span>
+            <span class="siError"><?php if(strcmp($errorMg,'')!==0 && $el===4) echo $errorMg;?></span>
           </div>
 
           <div class="prenom_ins inscription">
             <span class="span_ins span_prenom">Prénom</span>
             <label for="prenom_ins" class="label_ins">Prénom</label>
             <input type="text" name="prenom" id="prenom_ins">
-            <span class="siError"></span>
+            <span class="siError"><?php if(strcmp($errorMg,'')!==0 && $el===4) echo $errorMg;?></span>
           </div>
 
           <div class="mail_ins inscription">
             <span class="span_ins span_mail">email</span>
             <label for="mail_ins" class="label_ins">email</label>
             <input type="email" name="mail" id="mail_ins">
-            <span class="siError"></span>
+            <span class="siError"><?php if(strcmp($errorMg,'')!==0 && $el === 5) echo $errorMg;?></span>
           </div>
 
           <div class="dateNaiss_ins inscription">
             <span class="span_ins span_date">Né(e) le</span>
             <label for="dateNaiss_ins" class="label_ins label_date">Exemple:jj/mm/aaaa</label>
             <input type="text" name="dateNaiss" id="dateNaiss_ins">
-            <span class="siError"></span>
+            <span class="siError"><?php if(strcmp($errorMg,'')!==0 && $el === 6) echo $errorMg;?></span>
           </div>
 
           <div class="cdp_ins inscription">
             <span class="span_ins span_cdp">C.Postal</span>
             <label for="cdp_ins" class="label_ins label_cdp">Code postal</label>
             <input type="text" name="cdp" id="cdp_ins">
-            <span class="siError"></span>
+            <span class="siError"><?php if(strcmp($errorMg,'')!==0 && $el === 7) echo $errorMg;?></span>
           </div>
 
           <div class="ville_ins inscription">
             <span class="span_ins span_ville">Ville</span>
             <label for="ville_ins" class="label_ins">Ville</label>
             <input type="text" name="ville" id="ville_ins">
-            <span class="siError"></span>
+            <span class="siError"><?php if(strcmp($errorMg,'')!==0 && $el === 8) echo $errorMg;?></span>
           </div>
 
           <div class="tel_ins inscription">
             <span class="span_ins span_tel">Tél</span>
             <label for="tel_ins" class="label_ins label_tel">Téléphone</label>
             <input type="tel" name="tel" id="tel_ins">
-            <span class="siError"></span>
+            <span class="siError"><?php if(strcmp($errorMg,'')!==0 && $el===9) echo $errorMg;?></span>
           </div>
 
           <div class="submit_ins">
@@ -270,7 +216,7 @@ session_start();
           <a href="modifPassword.php">Mot de passe oublier ?</a>
         </p>
 
-        <p class="siError err_log err_mdp"></p>
+        <p class="siError err_log err_mdp" style="padding:10px; text-align:center; width:80%; margin:20px auto;"></p>
       </div>
 		</main>
 
