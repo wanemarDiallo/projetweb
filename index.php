@@ -42,7 +42,7 @@ session_start();
 							<h1 class="titre"> <?php echo $_GET['titreRecettes'];?> </h1>
 							<div class="imageRecette">
 								<figure>
-									<img src="photos/<?php echo $nomImage;?>.jpg" alt="l'image de cette recette est indisponible"/>
+									<img src="photos/<?php if(is_file('photos/'.$nomImage.'.jpg')){echo $nomImage;}else{echo "cocktails";}?>.jpg" alt="l'image de cette recette est indisponible"/>
 									<figcaption>
 										<hr class="hr"/><br/>
 											<button type="button" name="favorie" class="buton_favorie">
