@@ -67,8 +67,4 @@ $(document).ready(function() {
         });
         window.location.reload('panier.php');
     }
-    /**
-     * @param leFooter
-     * 
-     */
 });

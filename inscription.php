@@ -9,6 +9,7 @@ session_start();
   /////////////////////////////////////////////////////
   $errorMg = '';
   $el = 0;
+  $in = 1;
   /*Partie table des inscris enregistré sur un fichier php*/
   $filename = "lesInscris.php";
   include('lesInscris.php');
@@ -43,27 +44,86 @@ session_start();
         else if(!control_tel($tel)) {$el = 9; $errorMg = "Numéro de Téléphone non valide";}
         else
         {
-            if(!array_key_exists($login, $table_inscris))//verification s'il n'existe pas un login pareil
-            $inscris = array(
-                              $login => array(
-                                          'mdp'=>password_hash($mdp, PASSWORD_DEFAULT),
-                                          'nom'=>$nom,
-                                          'prenom'=>$prenom,
-                                          'sexe'=>$_POST['sexe'],
-                                          'mail'=>$mail,
-                                          'date' => $dateNaiss,
-                                          'cdp' =>  $cdp,
-                                          'ville' => $ville,
-                                          'tel' =>   $tel
-                              )
-                            );
-            $table_inscris +=$inscris;//ajout du nouveau utilisateur sur la table des inscris
-            file_put_contents($filename, '<?php $table_inscris = '.var_export($table_inscris, true).'; ?>', LOCK_EX);
+            if(!array_key_exists($login, $table_inscris))
+            {//verification s'il n'existe pas un login pareil
+              $inscris = array(
+                                $login => array(
+                                            'mdp'=>password_hash($mdp, PASSWORD_DEFAULT),
+                                            'nom'=>$nom,
+                                            'prenom'=>$prenom,
+                                            'sexe'=>$_POST['sexe'],
+                                            'mail'=>$mail,
+                                            'date' => $dateNaiss,
+                                            'cdp' =>  $cdp,
+                                            'ville' => $ville,
+                                            'tel' =>   $tel
+                                )
+                              );
+              $table_inscris +=$inscris;//ajout du nouveau utilisateur sur la table des inscris
+              file_put_contents($filename, '<?php $table_inscris = '.var_export($table_inscris, true).'; ?>', LOCK_EX);
+            }
+            else {$errorMg = "Vous êtes déjà incris."; $in =0;}
         }
 
       }
     }
-    include 'functions_verif.php';
+   /////////////////////////////////////////////////////////////////////
+   ////////////////////////////////////////////////////////////////////
+   function control_login($data_login){
+    if(!preg_match('/^[a-z]+[0-9]*$/i', trim($data_login)))
+      return FALSE;
+    else return TRUE;
+  }
+  function control_mdp($data_mdp){
+    $taille = trim(strlen($data_mdp));
+    if(($taille < 8)) return FALSE;
+    else return TRUE;
+  }
+  function control_name($data_name, $data_lastName){
+    if(!preg_match('/^[a-z-]+$/i', trim($data_name))) return FALSE;
+    else if(!preg_match('/^[a-z-]+$/i', trim($data_lastName))) return FALSE;
+    else return TRUE;
+  }
+  function control_sexe($data_sexe){
+    if(strcmp(strtolower($data_sexe), 'homme')!==0 && strcmp(strtolower($data_sexe), 'femme')!==0) return FALSE;
+    else return TRUE;
+  }
+  function control_mail($data_mail){
+    if(!preg_match('/^[a-z0-9.-]+@[a-z0-9.-]{2,}[.]{1}[a-z]{2,3}$/', strtolower(trim($data_mail)))) return FALSE;
+    else return TRUE;
+  }
+  function control_cdp($data_cdp){
+    if(!preg_match('/^[0-9]{5}$/', strtolower(trim($data_cdp)))) return FALSE;
+    else return TRUE;
+  }
+  function control_date($data_date){
+    if(!preg_match('/^[0-9]{2}[\/][0-9]{2}[\/][0-9]{4}$/', trim($data_date))) return FALSE;
+    else
+    {
+      list($jour, $mois, $annee) = explode('/', $data_date);
+      if($mois >= 1 && $mois <= 12){
+        if(($mois != 2 && $jour >= 1 && $jour <= 31) || ($mois == 2 && $jour >= 1 && $jour <= 29)){
+          if($annee >= 1 && $annee <= 32767){
+            if(checkdate($mois, $jour, $annee)) return TRUE;
+            else return FALSE;
+          }
+        else return FALSE;
+        }
+        else return FALSE;
+      }
+      else return FALSE;
+    }
+  }
+  function control_ville($data_ville){//faut traiter les accents (éè)
+    if(!preg_match('/^[a-z-\s]+$/', strtolower(trim($data_ville)))) return FALSE;
+    else return TRUE;
+  }
+  function control_tel($data_tel){
+    if(!preg_match('/^[0][1-9][0-9]{8}$/', trim($data_tel))) return FALSE;
+    else return TRUE;
+  }
+  /////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////
 	?>
 
   <!--page d'inscription et connexion -->
@@ -222,7 +282,11 @@ session_start();
         <p class="siError err_log err_mdp" style="padding:10px; text-align:center; width:80%; margin:20px auto;"></p>
       </div>
 		</main>
-
+    <div style="width:50%; margin:10px auto;">
+      <p style="font-size:0.7em; color:red; text-align:center;">
+        <?php if(isset($errorMg) && isset($in)) echo $errorMg;?>
+      </p>
+    </div>
     <!--Le <footer>-->
     <?php include "footer.php";?>
     <script src="jquery-3.3.1.min.js"></script>

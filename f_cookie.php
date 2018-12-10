@@ -9,7 +9,7 @@ session_start();
     if(!isset($_COOKIE[$nom]) && !isset($_SESSION['login']))
     {
       $value_json = json_encode($value_array);
-      if(setcookie($nom, $value_json, time()+3600/10)) echo "ok";
+      if(setcookie($nom, $value_json, time()+3600)) echo "Bien ajouté";
     }
     if(isset($_COOKIE[$nom]) && !isset($_SESSION['login']))
     {
@@ -24,7 +24,7 @@ session_start();
       Ensuite
       */
       $value_json = json_encode($value_array);
-      if(setcookie($nom, $value_json, time()+3600/10)) echo "ajouté";
+      if(setcookie($nom, $value_json, time()+3600)) echo "bien ajouté";
     }
     if(!isset($_COOKIE[$nom]) && isset($_SESSION['login']))
     {
@@ -35,7 +35,7 @@ session_start();
           {
             array_push($tab_fav[$login]['cocktail'], $value_array['cocktail'][0]);
           }
-      echo "ok avec session";
+        echo "bien ajouté";
       file_put_contents($filename, '<?php $tab_fav = '.var_export($tab_fav, true).'; ?>', LOCK_EX);
     }
   }
